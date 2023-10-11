@@ -6,7 +6,6 @@ import img1 from '../../assets/room1.png'
 import img2 from '../../assets/room2.png'
 import img3 from '../../assets/room3.png'
 import img4 from '../../assets/room4.png'
-import { Link } from 'react-router-dom'
 
 const Data = [
     {
@@ -87,7 +86,7 @@ const Popular = () => {
                                             <p>ราคา ฿ {price}</p>
                                             <p>จำนวนคน {num} คน</p>
                                         </div>
-                                        <Link to='/booking'><button className='btn'>รายละเอียดเพิ่มเติม</button></Link>
+                                        <button className='btn'>รายละเอียดเพิ่มเติม</button>
                                     </div>                           
                                 </div>
                             )
