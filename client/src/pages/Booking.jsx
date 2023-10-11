@@ -1,5 +1,6 @@
 // import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Link } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -18,6 +19,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import Navbar from "../components/Navbar/Navbar";
 
 function Booking() {
   const [bookingData, setBookingData] = useState({
@@ -64,8 +66,13 @@ function Booking() {
 
   
   return (
-    <div className="content-wrapper">
-      <div className="container-sm flex-grow-1 container-p-y">
+   <>
+   <Navbar/>
+   <br />
+   <br />
+   <br />
+    <div className="content-wrapper pt-5">
+      <div className="container-sm flex-grow-1 container-p-y ">
         <div className="d-flex justify-content-start">
           <h4 className="fw-bold py-3 mb-4">โปรดกรอกรายละเอียด</h4>
         </div>
@@ -254,15 +261,14 @@ function Booking() {
                   : null}
               </Card.Text>
 
-              <Button variant="primary">ยืนยันการจอง</Button>
-              {/* <Link to="/confirm-booking" state={bookingData}>
-                ยืนยันการจอง
-              </Link> */}
+              
+              <Link to="/paymentMethod" ><Button variant="primary">ยืนยันการจอง</Button></Link>
             </Card.Body>
           </Card>
         </div>
       </div>
     </div>
+     </>
   );
 }
 

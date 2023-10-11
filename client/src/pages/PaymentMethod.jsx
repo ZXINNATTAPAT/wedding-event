@@ -1,4 +1,6 @@
 // import * as React from 'react';
+import Navbar from "../components/Navbar/Navbar";
+import { Link } from 'react-router-dom'
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -60,7 +62,12 @@ function PaymentMethod() {
   console.log(selectedMethod);
   return (
     <>
-
+    <Navbar/>
+<br />
+<br />
+<br />
+<br />
+<br />
       <Paper
         sx={{
           p: 2,
@@ -110,9 +117,11 @@ function PaymentMethod() {
                 </Typography>
               </Grid>
               <Grid item>
-                <Button sx={{ cursor: "pointer" }} variant="contained">
+              <Link to="/booking" ><Button variant="contained">แก้ไข</Button></Link>
+
+                {/* <Button sx={{ cursor: "pointer" }} variant="contained">
                   แก้ไข
-                </Button>
+                </Button> */}
               </Grid>
             </Grid>
             <Grid item>
