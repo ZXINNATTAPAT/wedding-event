@@ -4,3 +4,4 @@ installation
 => npm install react-bootstrap bootstrap
 => npm install @mui/x-date-pickers
 => npm install dayjs
+=> npm install mysql2
