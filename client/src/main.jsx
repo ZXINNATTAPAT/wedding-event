@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.jsx'
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Login from './components/Login/Login.jsx';
-import Booking from './pages/Booking.jsx';
-import PaymentMethod from './pages/PaymentMethod.jsx';
+import Roomdetail from './components/Roomdetail/Roomdetail.jsx';
+import EditProflie from './components/EditProflie/EditProflie.jsx';
 import Payment from './pages/Payment.jsx';
 import Thankyou from './pages/Thankyou.jsx';
 import Status from './pages/Status.jsx';
@@ -21,12 +22,12 @@ const router = createBrowserRouter([
     element: <Login/>
   },
   {
-    path: "booking",
-    element: <Booking/>
+    path: "roomdetail/:roomId",
+    element: <Roomdetail/>
   },
   {
-    path: "paymentMethod",
-    element: <PaymentMethod/>
+    path: "editproflie",
+    element: <EditProflie/>
   },
   {
     path: "/payment/:paymentMethod",
