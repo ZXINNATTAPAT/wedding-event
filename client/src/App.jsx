@@ -5,11 +5,13 @@ import Home from './components/Home/Home'
 import Popular from './components/Popular/popular'
 
 function App() {
+
   return (
       <>
         <Navbar/>
         <Home/>
         <Popular/>
+        
       </>
   )
 }
