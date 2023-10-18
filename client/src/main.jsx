@@ -1,10 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import {createBrowserRouter,RouterProvider,Route,Link,} from "react-router-dom";
+import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Login from './components/Login/Login.jsx';
 import Booking from './pages/Booking.jsx';
 import PaymentMethod from './pages/PaymentMethod.jsx';
+import Payment from './pages/Payment.jsx';
+import Thankyou from './pages/Thankyou.jsx';
+import Status from './pages/Status.jsx';
+import Menu from '../admin2/Menu.jsx';
+// import TableUser from '../admin2/TableUser.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +27,32 @@ const router = createBrowserRouter([
   {
     path: "paymentMethod",
     element: <PaymentMethod/>
+  },
+  {
+    path: "/payment/:paymentMethod",
+    element: <Payment/>
+  },
+  {
+    path: "/thankyou",
+    element: <Thankyou />
   }
+  ,
+  {
+    path: "/status",
+    element: <Status />
+  }
+  ,
+  {
+    path: "/menu",
+    element: <Menu/>
+  }
+  // ,
+  // {
+  //   path: "/tableuser",
+  //   element: <TableUser/>
+  // }
+  
+  
 ]);
 
 

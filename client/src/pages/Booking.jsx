@@ -76,7 +76,7 @@ function Booking() {
         <div className="d-flex justify-content-start">
           <h4 className="fw-bold py-3 mb-4">โปรดกรอกรายละเอียด</h4>
         </div>
-        <h5 className="d-flex justify-content-start">1. ข้อมูลงานเบื้องต้น</h5>
+        <h5 className="d-flex justify-content-start">ข้อมูลงานเบื้องต้น</h5>
         <div className="row">
           <div className="col-8">
             <div className="card mb-4">
@@ -112,23 +112,11 @@ function Booking() {
                   </Form.Group>
                   <Form.Group as={Row} className="mb-2" controlId="">
                     <Col>
-                      <TextField
-                        type="number"
-                        required
-                        id=""
-                        label="จำนวนคน"
-                        fullWidth
-                        variant="outlined"
-                        name="numberOfPeople"
-                        onChange={handleChange}
-                      />
-                    </Col>
-                  </Form.Group>
-                  <Form.Group as={Row} className="mb-2" controlId="">
-                    <Col>
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={["DatePicker"]}>
                           <DatePicker
+                        required
+
                             label="วันที่จัดงาน"
                             format="DD/MM/YYYY"
                             disablePast
@@ -145,6 +133,8 @@ function Booking() {
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={["TimePicker"]}>
                           <TimePicker
+                        required
+
                             label="เวลาเริ่มงาน"
                             ampm={false}
                             mask="__:__"
@@ -158,6 +148,8 @@ function Booking() {
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DemoContainer components={["TimePicker"]}>
                           <TimePicker
+                        required
+
                             label="เวลาจบงาน"
                             ampm={false}
                             mask="__:__"
@@ -170,7 +162,22 @@ function Booking() {
                       </LocalizationProvider>
                     </Col>
                   </Form.Group>
+                  
                   <div>
+                  <Form.Group as={Row} className="mb-2" controlId="">
+                    <Col>
+                      <TextField
+                        required
+                        type="number"
+                        id=""
+                        label="จำนวนคน"
+                        fullWidth
+                        variant="outlined"
+                        name="numberOfPeople"
+                        onChange={handleChange}
+                      />
+                    </Col>
+                  </Form.Group>
                     <FormControl
                       sx={{ m: 1, minWidth: "100%", textAlign: "left" }}
                     >
@@ -178,6 +185,7 @@ function Booking() {
                         จำนวนช่างถ่ายรูป
                       </InputLabel>
                       <Select
+                        required
                         id="demo-simple-select-helper"
                         value={bookingData.numOfPhotos}
                         name="numOfPhotos"
@@ -197,6 +205,7 @@ function Booking() {
                         ประเภทดนตรี
                       </InputLabel>
                       <Select
+                        required
                         id="demo-simple-select-helper"
                         defaultValue="undefined"
                         name="genreOfMusic"
@@ -260,7 +269,6 @@ function Booking() {
                   ? `ประเภทดนตรี: ${bookingData.genreOfMusic}`
                   : null}
               </Card.Text>
-
               
               <Link to="/paymentMethod" ><Button variant="primary">ยืนยันการจอง</Button></Link>
             </Card.Body>
