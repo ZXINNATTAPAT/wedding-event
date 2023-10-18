@@ -1,25 +1,29 @@
-import React,{useState} from 'react'
-import './login.css'
-import  userIcon from '../../assets/person.png'
-import  emailIcon from '../../assets/email.png'
-import  passwordIcon from '../../assets/password.png'
-import {BsFillTelephoneFill} from "react-icons/bs"
+import React, { useState } from 'react';
+import './login.css';
+import userIcon from '../../assets/person.png';
+import emailIcon from '../../assets/email.png';
+import passwordIcon from '../../assets/password.png';
+import { BsFillTelephoneFill } from "react-icons/bs";
 
 const Login = () => {
-    const [action,setAction] = useState("Login")
+    const [action, setAction] = useState("Login");
 
-    return(
+    return (
         <div className="Container">
+            <div className="submitContainer">
+                <div className={action === "Login" ? "submit" : "submit white"} onClick={() => { setAction("Login") }}>Log in</div>
+                <div className={action === "Login" ? "submit white" : "submit"} onClick={() => { setAction("Sign up") }}>Sign up</div>
+            </div>
             <div className="Header">
                 <div className="text">{action}</div>
                 <div className="underline"></div>
             </div>
             <div className="Inputs">
-                {action==="Login"?<div></div>: 
-                <div className="Input">
-                    <img src={userIcon} alt="" />
-                    <input className='input' type="text" placeholder='Username' pattern='^[a-z0-9_-]+' />
-                </div>}           
+                {action === "Login" ? <div></div> :
+                    <div className="Input">
+                        <img src={userIcon} alt="" />
+                        <input className='input' type="text" placeholder='Username' pattern='^[a-z0-9_-+' />
+                    </div>}
 
                 <div className="Input">
                     <img src={emailIcon} alt="" />
@@ -28,22 +32,23 @@ const Login = () => {
 
                 <div className="Input">
                     <img src={passwordIcon} alt="" />
-                    <input className='input' type="password" placeholder='Password'/>
+                    <input className='input' type="password" placeholder='Password' />
                 </div>
 
-                {action==="Login"?<div></div>: 
-                <div className="Input">
-                    <div className='phone'><BsFillTelephoneFill/></div>
-                    <input className='input' type="text" placeholder='Phone' pattern='^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$'/>
-                </div>} 
-                
+                {action === "Login" ? <div></div> :
+                    <div className="Input">
+                        <div className='phone'><BsFillTelephoneFill /></div>
+                        <input className='input' type="text" placeholder='Phone' pattern='^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$' />
+                    </div>}
             </div>
-            <div className="submitContainer">
-                <div className={action === "Login" ? "submit" : "submit white"} onClick={()=>{setAction("Login")}}>Log in</div>
-                <div className={action === "Login" ? "submit white" : "submit"} onClick={() => { setAction("Sign up") }}>Sign up</div>
-            </div>
+
+            {action === "Login" ? (
+                <button className="BottomButton">Login</button>
+            ) : (
+                <button className="BottomButton">Sign up</button>
+            )}
         </div>
-    )
+    );
 }
 
-export default Login
+export default Login;
