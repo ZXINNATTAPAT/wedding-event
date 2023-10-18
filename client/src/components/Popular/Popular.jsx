@@ -6,6 +6,7 @@ import img1 from '../../assets/room1.png'
 import img2 from '../../assets/room2.png'
 import img3 from '../../assets/room3.png'
 import img4 from '../../assets/room4.png'
+import { Link } from 'react-router-dom';
 
 const Data = [
     {
@@ -56,26 +57,10 @@ const Popular = () => {
                 </div>
 
                 <div className="mainContent grid">
-                    {/* <div className="place">
-                        <div className="placeImage">
-                            <img src={img} alt="Image title" />
-                        </div>
-
-                        <div className="Info">
-                            <div className="textInfo">
-                                <h2>ห้อง 1</h2>
-                                <p>ราคา ฿ 10000 - 12000</p>
-                                <p>จำนวนคน 80 คน</p>
-                            </div>
-                            <button className='btn'>รายละเอียดเพิ่มเติม</button>
-                        </div>                        
-
-                        
-                    </div> */}
                     {
-                         Data.map(({imgSrc,roomNo,price,num}) =>{
+                         Data.map(({imgSrc,roomNo,price,num,id}) =>{
                             return(
-                                <div className="place">
+                                <div className="place" key={id}>
                                     <div className="placeImage">
                                         <img src={imgSrc} alt="Image title" />
                                     </div>
@@ -86,7 +71,9 @@ const Popular = () => {
                                             <p>ราคา ฿ {price}</p>
                                             <p>จำนวนคน {num} คน</p>
                                         </div>
-                                        <button className='btn'>รายละเอียดเพิ่มเติม</button>
+                                        <button className='btn'>
+                                            <Link to={`/roomdetail/${id}`}>รายละเอียดเพิ่มเติม</Link>
+                                        </button>
                                     </div>                           
                                 </div>
                             )
@@ -94,7 +81,6 @@ const Popular = () => {
                     }
                 </div>
             </div>
-
        </section>
     )
 }
