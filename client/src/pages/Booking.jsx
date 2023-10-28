@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Link } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -7,7 +6,6 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-// import { FormControl } from "react-bootstrap";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -19,7 +17,7 @@ import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Navbar from "../components/Navbar/Navbar";
+import NavbarUser from "../components/Navbar-user/NavbarUser";
 
 function Booking() {
   const [bookingData, setBookingData] = useState({
@@ -67,7 +65,7 @@ function Booking() {
   
   return (
    <>
-   <Navbar/>
+   <NavbarUser/>
    <br />
    <br />
    <br />

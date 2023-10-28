@@ -1,5 +1,6 @@
-import React from 'react'
+import { Link } from 'react-router-dom';
 import './roomdetail.css'
+import NavbarUser from '../Navbar-user/NavbarUser'
 import img1 from '../../assets/room1.png'
 import img2 from '../../assets/room2.png'
 import img3 from '../../assets/room3.png'
@@ -53,7 +54,13 @@ const Roomdetail = () => {
     }
 
     return (
-        <div>
+        <>
+        <NavbarUser/>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
             <img className='roompic' src={roomData.imgSrc} alt="Room Image" />
             <div className='detail1'>
                 <h2>{`ห้อง ${roomData.roomNo}`}</h2>
@@ -73,14 +80,14 @@ const Roomdetail = () => {
                     </div>
       
                 </div>
-                     <button className='chooseroom'>เลือก</button>
+              <Link to="/booking" ><button className='chooseroom'>เลือก</button></Link>
                 <div className='review'>
             
 
                 </div>
            
             
-        </div>
+        </>
     )
 }
 

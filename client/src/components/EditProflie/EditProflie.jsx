@@ -1,7 +1,14 @@
 import React from 'react'
+import NavbarUser from '../Navbar-user/NavbarUser'
 
 const EditProflie = () => {
     return (
+        <>
+        <NavbarUser/>
+        <br />
+        <br />
+        <br />
+        <br />
         <div className="container">
             <h1>Edit Profile</h1>
             <hr />
@@ -64,6 +71,7 @@ const EditProflie = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

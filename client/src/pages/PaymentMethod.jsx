@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar/Navbar";
+import NavbarUser from "../components/Navbar-user/NavbarUser";
 import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
@@ -65,7 +65,7 @@ function PaymentMethod() {
   console.log(selectedMethod);
   return (
     <>
-      <Navbar />
+      <NavbarUser />
       <br />
       <br />
       <br />
@@ -180,7 +180,7 @@ function PaymentMethod() {
                       <MenuItem value="">
                         <em>เลือกวิธีการชำระเงิน</em>
                       </MenuItem>
-                      <MenuItem value="creditCard">บัตรเครดิต</MenuItem>
+                      {/* <MenuItem value="creditCard">บัตรเครดิต</MenuItem> */}
                       <MenuItem value="qrCode">สแกนคิวอาร์โค้ด</MenuItem>
                       <MenuItem value="bankTransfer">
                         โอนผ่านบัญชีธนาคาร
