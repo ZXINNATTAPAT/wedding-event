@@ -5,6 +5,7 @@ import App from './App.jsx'
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Login from './components/Login/Login.jsx';
 import Roomdetail from './components/Roomdetail/Roomdetail.jsx';
+import Venue from './pages/Venue.jsx';
 import EditProflie from './components/EditProflie/EditProflie.jsx';
 import Booking from './pages/Booking.jsx';
 import PaymentMethod from './pages/PaymentMethod.jsx';
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "roomdetail/:roomId",
     element: <Roomdetail/>
+  },
+  {
+    path: "/venue",
+    element: <Venue/>
   },
   {
     path: "editprofile",
