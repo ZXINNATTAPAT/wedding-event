@@ -51,19 +51,14 @@ const NavbarUser = () => {
               </Link>
             </li>
             <li className="navItem">
-              <Link to="/venue">
-                <a className="navLink">สถานที่จัดงาน</a>
-              </Link>
-            </li>
-            <li className="navItem">
               <Link to="/status">
                 <a className="navLink">ตรวจสอบสถานะ</a>
               </Link>
             </li>
 
             <li className="navItem">
-              <Link to="/profile">
-                <a className="navLink">โปรไฟล์</a>
+              <Link to="/editprofile">
+                <a className="navLink">แก้ไขโปรไฟล์</a>
               </Link>
             </li>
           </ul>
