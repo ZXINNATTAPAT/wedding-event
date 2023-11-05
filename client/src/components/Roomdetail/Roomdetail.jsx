@@ -208,9 +208,8 @@ const Roomdetail = () => {
 
 
         </>
-    )
+    );
 }
 
-
-export default Roomdetail
+export default Roomdetail;
 
