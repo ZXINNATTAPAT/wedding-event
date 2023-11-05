@@ -1,13 +1,14 @@
 import { useState } from "react";
-import "./popular.css";
+import "../components/Pagination/Pagination.css";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { BsArrowRightShort } from "react-icons/bs";
-import img1 from "../../assets/room1.png";
-import img2 from "../../assets/room2.png";
-import img3 from "../../assets/room3.png";
-import img4 from "../../assets/room4.png";
+import img1 from "../assets/room1.png";
+import img2 from "../assets/room2.png";
+import img3 from "../assets/room3.png";
+import img4 from "../assets/room4.png";
 import { Link } from "react-router-dom";
-import Pagination from "../Pagination/Paginations.jsx";
+import Pagination from "../components/Pagination/Paginations.jsx";
+import NavbarUser from "../components/Navbar-user/NavbarUser";
 
 const Data = [
   {
@@ -104,14 +105,17 @@ const Popular = () => {
   const currentPosts = Data.slice(firstPostIndex, lastPostIndex);
   return (
     <>
+    <NavbarUser/>
+    <br />
+    <br />
+    <br />
       <section className="popular section container">
         <div className="secContainer">
           <div className="secHeader flex">
             <div className="textDiv">
-              <h2 className="secTitle">สถานที่แนะนำ</h2>
+              <h2 className="secTitle">สถานที่จัดงาน</h2>
             </div>
-
-            
+           
           </div>
 
           <div className="mainContent grid">

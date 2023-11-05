@@ -42,7 +42,7 @@
     border-radius: .7rem;
     width: 6rem;
     height: 2.5rem;
-    margin-top: 1rem;
+    margin-top: 2rem;
     margin-left: auto;
     margin-right: 3rem;
     &:hover{
@@ -50,3 +50,52 @@
     }
 }
 
+.box-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.box{
+    width: 100%;
+    box-shadow: 2px 2px 30px rgb(0, 0, 0, 0.1);
+    background-color: rgb(255, 238, 240);
+    padding: 20px;
+    margin: 15px;
+    cursor: pointer;
+}
+
+.name-user strong{
+    font-size: 1.1rem;
+}
+
+.stars{
+    color: #f9d71c;
+    font-size: 1.3rem;
+}
+
+.box-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2opx;
+}
+.comment{
+    margin-top: 1rem;
+}
+
+.comment p{
+    font-size: 0.9rem;
+    color: #4b4b4b;
+}
+
+.reviews{
+    margin-top: 4rem;
+}
+
+.reviews h2{
+    font-weight: 600;
+    padding-left: 1rem;
+}
