@@ -1,79 +1,108 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import App from './App.jsx'
-import {createBrowserRouter,RouterProvider} from "react-router-dom";
-import Login from './components/Login/Login.jsx';
-import Roomdetail from './components/Roomdetail/Roomdetail.jsx';
-import Venue from './pages/Venue.jsx';
-import EditProflie from './components/EditProflie/EditProflie.jsx';
-import Booking from './pages/Booking.jsx';
-import PaymentMethod from './pages/PaymentMethod.jsx';
-import Payment from './pages/Payment.jsx';
-import Thankyou from './pages/Thankyou.jsx';
-import Status from './pages/Status.jsx';
-// import Menu from '../admin2/Menu.jsx';
-// import TableUser from '../admin2/TableUser.jsx';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./components/Login/Login.jsx";
+import LoginAdmin from "./components/Login/Login-admin/LoginAdmin.jsx";
+import Roomdetail from "./components/Roomdetail/Roomdetail.jsx";
+import Venue from "./pages/Venue.jsx";
+import EditProflie from "./components/EditProflie/EditProflie.jsx";
+import Booking from "./pages/Booking.jsx";
+import PaymentMethod from "./pages/PaymentMethod.jsx";
+import Payment from "./pages/Payment.jsx";
+import Thankyou from "./pages/Thankyou.jsx";
+import Status from "./pages/Status.jsx";
+import BookingList from "./components/admin/BookingList.jsx";
+import VenueList from "./components/admin/VenueList.jsx";
+import Music from "./components/admin/Music.jsx";
+import Photographer from "./components/admin/Photographer.jsx";
+import User from "./components/admin/User.jsx";
+import Home from "./components/Home/Home-user/Home.jsx";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>
+    element: <App />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
   },
   {
     path: "login",
-    element: <Login/>
+    element: <Login />,
+  },
+  {
+    path: "/login-admin",
+    element: <LoginAdmin />,
   },
   {
     path: "roomdetail/:roomId",
-    element: <Roomdetail/>
+    element: <Roomdetail />,
   },
   {
     path: "/venue",
-    element: <Venue/>
+    element: <Venue />,
   },
   {
     path: "editprofile",
-    element: <EditProflie/>
+    element: <EditProflie />,
   },
   {
     path: "booking",
-    element: <Booking/>
+    element: <Booking />,
   },
   {
     path: "/paymentMethod",
-    element: <PaymentMethod/>
+    element: <PaymentMethod />,
   },
   {
     path: "/payment/:paymentMethod",
-    element: <Payment/>
+    element: <Payment />,
   },
   {
     path: "/thankyou",
-    element: <Thankyou />
-  }
-  ,
+    element: <Thankyou />,
+  },
   {
     path: "/status",
-    element: <Status />
-  }
-  // ,
-  // {
-  //   path: "/menu",
-  //   element: <Menu/>
-  // }
-  // ,
-  // {
-  //   path: "/tableuser",
-  //   element: <TableUser/>
-  // }
+    element: <Status />,
+  },
+  {
+    path: "/admin",
+    element: <BookingList />,
+  },
+  {
+    path: "/booking-list",
+    element: <BookingList />,
+  },
+  {
+    path: "/venue-list",
+    element: <VenueList />,
+  },
+  {
+    path: "/music-genre",
+    element: <Music />,
+  },
+  {
+    path: "/photographer",
+    element: <Photographer />,
+  },
+  {
+    path: "/user-list",
+    element: <User />,
+  },
+
   
+
+ 
   
 ]);
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    < RouterProvider router={router}/>
-  </React.StrictMode>,
-)
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);

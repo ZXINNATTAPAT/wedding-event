@@ -13,7 +13,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Select from "@mui/material/Select";
-import InputLabel from '@mui/material/InputLabel';
+import InputLabel from "@mui/material/InputLabel";
 // import Select from "@mui/material/Select";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
@@ -168,24 +168,24 @@ function PaymentMethod() {
                 <FormControl
                   sx={{ textAlign: "center", width: "90%", margin: 2 }}
                 >
-                  <InputLabel id="demo-simple-select-helper-label">เลือกวิธีการชำระเงิน</InputLabel>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    เลือกวิธีการชำระเงิน
+                  </InputLabel>
 
-                    <Select
-                      style={{ textAlign: "center" }}
-                      name=""
-                      id="demo-simple-select-helper"
-                      onChange={handlePaymentMethod}
-
-                    >
-                      <MenuItem value="">
-                        <em>เลือกวิธีการชำระเงิน</em>
-                      </MenuItem>
-                      {/* <MenuItem value="creditCard">บัตรเครดิต</MenuItem> */}
-                      <MenuItem value="qrCode">สแกนคิวอาร์โค้ด</MenuItem>
-                      <MenuItem value="bankTransfer">
-                        โอนผ่านบัญชีธนาคาร
-                      </MenuItem>
-                    </Select>
+                  <Select
+                    style={{ textAlign: "center" }}
+                    name=""
+                    id="demo-simple-select-helper"
+                    onChange={handlePaymentMethod}
+                    required
+                  >
+                    <MenuItem value="">
+                      <em>เลือกวิธีการชำระเงิน</em>
+                    </MenuItem>
+                    {/* <MenuItem value="creditCard">บัตรเครดิต</MenuItem> */}
+                    <MenuItem value="qrCode">สแกนคิวอาร์โค้ด</MenuItem>
+                    <MenuItem value="bankTransfer">โอนผ่านบัญชีธนาคาร</MenuItem>
+                  </Select>
                   <Grid sx={{ mt: 2 }}>
                     <Link to={`/payment/${selectedMethod}`}>
                       <Button variant="primary">ชำระเงิน</Button>
