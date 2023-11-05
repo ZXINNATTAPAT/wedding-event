@@ -143,7 +143,14 @@ const Roomdetail = () => {
                         </div>
                     </div>
                 </div>
-           
+
+            </div>
+            <div className="user-reviews">
+                 <h2>Comment</h2>
+                 <div className="text-comment">
+                    <textarea class="form-control" rows="4"></textarea>
+                    <button className='chooseroom'>รีวิว</button>
+                 </div>
             </div>
 
 

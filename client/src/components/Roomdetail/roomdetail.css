@@ -98,4 +98,23 @@
 .reviews h2{
     font-weight: 600;
     padding-left: 1rem;
+    padding-bottom: 1rem;
 }
+
+.user-reviews h2{
+    font-weight: 600;
+    padding-top: 2rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+}
+
+.text-comment{
+    padding-left: 1rem;
+    padding-bottom: 2rem;
+}
+
+textarea.form-control {
+    max-width: 98%;
+}
+
+  
