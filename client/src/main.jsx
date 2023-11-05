@@ -9,7 +9,7 @@ import EditProflie from './components/EditProflie/EditProflie.jsx';
 import Payment from './pages/Payment.jsx';
 import Thankyou from './pages/Thankyou.jsx';
 import Status from './pages/Status.jsx';
-import Menu from '../admin2/Menu.jsx';
+// import Menu from '../admin2/Menu.jsx';
 // import TableUser from '../admin2/TableUser.jsx';
 
 const router = createBrowserRouter([
@@ -42,11 +42,7 @@ const router = createBrowserRouter([
     path: "/status",
     element: <Status />
   }
-  ,
-  {
-    path: "/menu",
-    element: <Menu/>
-  }
+
   // ,
   // {
   //   path: "/tableuser",
