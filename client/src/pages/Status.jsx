@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Toast from "react-bootstrap/Toast";
 import Button from "react-bootstrap/Button";
-import Navbar from "../components/Navbar/Navbar";
+import NavbarUser from "../components/Navbar-user/NavbarUser";
 import { BsTrash3Fill } from "react-icons/bs";
 
 function MyComponent() {
@@ -20,7 +20,7 @@ function MyComponent() {
 
   return (
     <>
-      <Navbar />
+      <NavbarUser />
       <br />
       <br />
       <br />

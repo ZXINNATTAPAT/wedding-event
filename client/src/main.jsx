@@ -5,7 +5,10 @@ import App from './App.jsx'
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Login from './components/Login/Login.jsx';
 import Roomdetail from './components/Roomdetail/Roomdetail.jsx';
+import Venue from './pages/Venue.jsx';
 import EditProflie from './components/EditProflie/EditProflie.jsx';
+import Booking from './pages/Booking.jsx';
+import PaymentMethod from './pages/PaymentMethod.jsx';
 import Payment from './pages/Payment.jsx';
 import Thankyou from './pages/Thankyou.jsx';
 import Status from './pages/Status.jsx';
@@ -26,8 +29,20 @@ const router = createBrowserRouter([
     element: <Roomdetail/>
   },
   {
-    path: "editproflie",
+    path: "/venue",
+    element: <Venue/>
+  },
+  {
+    path: "editprofile",
     element: <EditProflie/>
+  },
+  {
+    path: "booking",
+    element: <Booking/>
+  },
+  {
+    path: "/paymentMethod",
+    element: <PaymentMethod/>
   },
   {
     path: "/payment/:paymentMethod",
@@ -42,7 +57,11 @@ const router = createBrowserRouter([
     path: "/status",
     element: <Status />
   }
-
+  // ,
+  // {
+  //   path: "/menu",
+  //   element: <Menu/>
+  // }
   // ,
   // {
   //   path: "/tableuser",
