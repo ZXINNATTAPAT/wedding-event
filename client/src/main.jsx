@@ -1,10 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.jsx'
-import {createBrowserRouter,RouterProvider,Route,Link,} from "react-router-dom";
+import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Login from './components/Login/Login.jsx';
+import Roomdetail from './components/Roomdetail/Roomdetail.jsx';
+import Venue from './pages/Venue.jsx';
+import EditProflie from './components/EditProflie/EditProflie.jsx';
 import Booking from './pages/Booking.jsx';
 import PaymentMethod from './pages/PaymentMethod.jsx';
+import Payment from './pages/Payment.jsx';
+import Thankyou from './pages/Thankyou.jsx';
+import Status from './pages/Status.jsx';
+// import Menu from '../admin2/Menu.jsx';
+// import TableUser from '../admin2/TableUser.jsx';
 
 const router = createBrowserRouter([
   {
@@ -16,13 +25,50 @@ const router = createBrowserRouter([
     element: <Login/>
   },
   {
+    path: "roomdetail/:roomId",
+    element: <Roomdetail/>
+  },
+  {
+    path: "/venue",
+    element: <Venue/>
+  },
+  {
+    path: "editprofile",
+    element: <EditProflie/>
+  },
+  {
     path: "booking",
     element: <Booking/>
   },
   {
-    path: "paymentMethod",
+    path: "/paymentMethod",
     element: <PaymentMethod/>
+  },
+  {
+    path: "/payment/:paymentMethod",
+    element: <Payment/>
+  },
+  {
+    path: "/thankyou",
+    element: <Thankyou />
   }
+  ,
+  {
+    path: "/status",
+    element: <Status />
+  }
+  // ,
+  // {
+  //   path: "/menu",
+  //   element: <Menu/>
+  // }
+  // ,
+  // {
+  //   path: "/tableuser",
+  //   element: <TableUser/>
+  // }
+  
+  
 ]);
 
 
