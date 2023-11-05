@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import "./navbar-user.css";
 import { BsHeartPulseFill } from "react-icons/bs";
 import { AiFillCloseCircle } from "react-icons/ai";
@@ -51,14 +51,24 @@ const NavbarUser = () => {
               </Link>
             </li>
             <li className="navItem">
+              <Link to="/venue">
+                <a className="navLink">สถานที่จัดงาน</a>
+              </Link>
+            </li>
+            <li className="navItem">
               <Link to="/status">
                 <a className="navLink">ตรวจสอบสถานะ</a>
               </Link>
             </li>
 
             <li className="navItem">
-              <Link to="/editprofile">
-                <a className="navLink">แก้ไขโปรไฟล์</a>
+              <Link to="/profile">
+                <a className="navLink">โปรไฟล์</a>
+              </Link>
+            </li>
+            <li className="navItem">
+              <Link to="/">
+                <a className="navLink">ออกจากระบบ</a>
               </Link>
             </li>
           </ul>

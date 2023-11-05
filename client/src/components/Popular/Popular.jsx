@@ -1,7 +1,5 @@
 import { useState } from "react";
 import "./popular.css";
-import { BsArrowLeftShort } from "react-icons/bs";
-import { BsArrowRightShort } from "react-icons/bs";
 import img1 from "../../assets/room1.png";
 import img2 from "../../assets/room2.png";
 import img3 from "../../assets/room3.png";

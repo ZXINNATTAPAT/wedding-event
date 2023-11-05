@@ -5,7 +5,7 @@ import NavbarUser from "../components/Navbar-user/NavbarUser";
 import { BsTrash3Fill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-function MyComponent() {
+function Status() {
   const [status, setStatus] = useState("รอดำเนินการ"); //ถ้าสถานะเป็นเสร็จสิ้นจะขึ้นปุ่มรีวิว
   const [showCancelButton, setShowCancelButton] = useState(true);
 
@@ -70,4 +70,4 @@ function MyComponent() {
   );
 }
 
-export default MyComponent;
+export default Status;
