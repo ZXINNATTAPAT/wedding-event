@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 
 
 function Search() {
-    const handleSearch = (event) => {
+    const handleSearch = () => {
         // ใส่โค้ดการค้นหาของคุณที่นี่
         // event.target.value จะเป็นข้อความที่ผู้ใช้ป้อนในช่องค้นหา
       };

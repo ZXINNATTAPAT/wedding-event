@@ -13,38 +13,90 @@ import { AiOutlineStar } from "react-icons/ai"
 
 const Data = [
     {
-        id: 1,
-        imgSrc: img1,
-        roomNo: 1,
-        price: 15000,
-        num: 50,
-        size: 100
+      id: 1,
+      imgSrc: img1,
+      roomNo: 1,
+      price: 15000,
+      num: 50,
     },
     {
-        id: 2,
-        imgSrc: img2,
-        roomNo: 2,
-        price: 17000,
-        num: 60,
-        size: 100
+      id: 2,
+      imgSrc: img2,
+      roomNo: 2,
+      price: 17000,
+      num: 60,
     },
     {
-        id: 3,
-        imgSrc: img3,
-        roomNo: 3,
-        price: 20000,
-        num: 70,
-        size: 100
+      id: 3,
+      imgSrc: img3,
+      roomNo: 3,
+      price: 20000,
+      num: 70,
     },
     {
-        id: 4,
-        imgSrc: img4,
-        roomNo: 4,
-        price: 18000,
-        num: 40,
-        size: 100
-    }
-]
+      id: 4,
+      imgSrc: img4,
+      roomNo: 4,
+      price: 18000,
+      num: 40,
+    },
+    {
+      id: 5,
+      imgSrc: img1,
+      roomNo: 5,
+      price: 15000,
+      num: 50,
+    },
+    {
+      id: 6,
+      imgSrc: img2,
+      roomNo: 6,
+      price: 17000,
+      num: 60,
+    },
+    {
+      id: 7,
+      imgSrc: img3,
+      roomNo: 7,
+      price: 20000,
+      num: 70,
+    },
+    {
+      id: 8,
+      imgSrc: img4,
+      roomNo: 8,
+      price: 18000,
+      num: 40,
+    },
+    {
+      id: 9,
+      imgSrc: img1,
+      roomNo: 9,
+      price: 15000,
+      num: 50,
+    },
+    {
+      id: 10,
+      imgSrc: img2,
+      roomNo: 10,
+      price: 17000,
+      num: 60,
+    },
+    {
+      id:11,
+      imgSrc: img3,
+      roomNo: 11,
+      price: 20000,
+      num: 70,
+    },
+    {
+      id: 12,
+      imgSrc: img4,
+      roomNo: 12,
+      price: 18000,
+      num: 40,
+    },
+  ];
 
 const Roomdetail = () => {
     const { roomId } = useParams();
@@ -148,7 +200,7 @@ const Roomdetail = () => {
             <div className="user-reviews">
                  <h2>Comment</h2>
                  <div className="text-comment">
-                    <textarea class="form-control" rows="4"></textarea>
+                    <textarea className="form-control" rows="4"></textarea>
                     <button className='chooseroom'>รีวิว</button>
                  </div>
             </div>

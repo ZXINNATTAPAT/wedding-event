@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"; // นำเข้า useParams จาก React Router
 import { Link } from "react-router-dom";
-import qrcodeImage from "../assets/qrcode.jpg";
-import Navbar from "../components/Navbar/Navbar";
+import qrcode from "../assets/qrcode.jpg";
+import NavbarUser from "../components/Navbar-user/NavbarUser";
 import Button from "react-bootstrap/Button";
 
 function Payment() {
@@ -26,7 +26,7 @@ function Payment() {
 
   return (
     <>
-      <Navbar />
+      <NavbarUser />
       <br />
       <br />
       <br />
@@ -111,9 +111,9 @@ function Payment() {
         {/* แสดงฟอร์มสำหรับสแกน */}
         {paymentMethod === "qrCode" && (
           <>
-            <div className="d-flex justify-content-center m-2 p-2">
+            <div className="d-flex justify-content-center m-2 p-2 width-20">
 
-              <img src={qrcodeImage} alt="" />
+              <img src={qrcode} alt="" />
             </div>
           </>
         )}

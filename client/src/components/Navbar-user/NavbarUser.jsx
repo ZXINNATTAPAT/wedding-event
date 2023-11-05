@@ -62,8 +62,8 @@ const NavbarUser = () => {
             </li>
 
             <li className="navItem">
-              <Link to="/editprofile">
-                <a className="navLink">แก้ไขโปรไฟล์</a>
+              <Link to="/profile">
+                <a className="navLink">โปรไฟล์</a>
               </Link>
             </li>
             <li className="navItem">

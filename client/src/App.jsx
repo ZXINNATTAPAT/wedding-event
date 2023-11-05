@@ -1,4 +1,4 @@
-import "./app.css";
+import './App.css'
 import Home from "./components/Home/Home";
 import Popular from "./components/Popular/Popular";
 import Pagination from "./components/Pagination/Paginations";

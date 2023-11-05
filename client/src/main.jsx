@@ -19,6 +19,7 @@ import Music from "./components/admin/Music.jsx";
 import Photographer from "./components/admin/Photographer.jsx";
 import User from "./components/admin/User.jsx";
 import Home from "./components/Home/Home-user/Home.jsx";
+import Profile from "./components/Profile/Profile.jsx";
 
 
 const router = createBrowserRouter([
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "login",
+    path: "/login",
     element: <Login />,
   },
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
   {
     path: "editprofile",
     element: <EditProflie />,
+  },
+  {
+    path: "profile",
+    element: <Profile />,
   },
   {
     path: "booking",
