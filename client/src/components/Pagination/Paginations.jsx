@@ -1,3 +1,4 @@
+
 import "./Pagination.css";
 
 const Paginations = ({ totalPosts, postsPerPage, setCurrentPage, currentPage }) => {
