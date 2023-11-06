@@ -1,32 +1,38 @@
 import { DataGrid } from "@mui/x-data-grid";
 import Adminhome from './Adminhome';
 import  Search  from './Search';
+import { useState, useEffect } from "react";
+import axios from "axios"; // หรือไลบรารีที่ใช้สำหรับการทำ HTTP request
 
+function User() {
+  const [rows, setRows] = useState([]);
+  // const [selectedRowIds, setSelectedRowIds] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/Userdata")
+      .then((response) => {
+        const rowsWithId = response.data.map((row, index) => ({
+          ...row,
+          id: index + 1, // สามารถใช้ id จากข้อมูลจริงได้ หรือใช้ index + 1 สำหรับตัวอย่าง
+          // EventDate: new Date(row.EventDate),
+        }));
+        setRows(rowsWithId);
+        // setFilteredRows(rowsWithId);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }, []);
 
 
 const columns = [
-    { field: "id", headerName: "ID", width: 10 },
+    { field: "CustomerID", headerName: "ID", width: 10 },
     { field: "Username", headerName: "Username", width: 130 },
     { field: "Password", headerName: "Password",width: 130 },
     { field: "Email", headerName: "Email", type:"email" ,width: 250 },
     { field: "PhoneNo", headerName: "PhoneNo",width: 130 },
-    
-    
   ];
   
-  const rows = [
-    {
-      id: 1,
-      Username: "John",
-      Password: "0124382",
-      Email: "john@example.com",
-      PhoneNo: "0938927823",
-     
-      
-    },
-    // เพิ่มข้อมูลแถวอื่น ๆ ตามต้องการ
-  ];
-function User() {
   return (
     <>
     <Adminhome/>
@@ -50,4 +56,4 @@ function User() {
   )
 }
 
-export default User
+export default User;

@@ -3,15 +3,35 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Adminhome from './Adminhome';
 import  Search  from './Search';
+import { useState, useEffect } from "react";
+import axios from "axios"; // หรือไลบรารีที่ใช้สำหรับการทำ HTTP request
 
+function VenueList() {
+  const [rows, setRows] = useState([]);
+  // const [selectedRowIds, setSelectedRowIds] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/Venuedata")
+      .then((response) => {
+        const rowsWithId = response.data.map((row, index) => ({
+          ...row,
+          id: index + 1, // สามารถใช้ id จากข้อมูลจริงได้ หรือใช้ index + 1 สำหรับตัวอย่าง
+          // EventDate: new Date(row.EventDate),
+        }));
+        setRows(rowsWithId);
+        // setFilteredRows(rowsWithId);
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
+  }, []);
 
 
 const columns = [
-    { field: "id", headerName: "ID", width: 10 },
+    { field: "VenueID", headerName: "ID", width: 10 },
     { field: "VenueName", headerName: "Venue name", width: 130 },
-    { field: "MaxCapicity", headerName: "Max Capicity", width: 130 },
+    { field: "MaxCapacity", headerName: "Max Capicity", width: 130 },
     { field: "VenuePrice", headerName: "Price", width: 130 },
-    
     {
       field: "Status",
       headerName: "Status",
@@ -38,18 +58,15 @@ const columns = [
     },
   ];
   
-  const rows = [
-    {
-      id: 1,
-      VenueName: "ห้อง 1",
-      MaxCapicity: "50",
-      VenuePrice: "50,000",
-     
-      
-    },
-    // เพิ่มข้อมูลแถวอื่น ๆ ตามต้องการ
-  ];
-function Venue() {
+  // const rows = [
+  //   {
+  //     id: 1,
+  //     VenueName: "ห้อง 1",
+  //     MaxCapicity: "50",
+  //     VenuePrice: "50,000", 
+  //   },
+  //   // เพิ่มข้อมูลแถวอื่น ๆ ตามต้องการ
+  // ];
   return (
     <>
     <Adminhome/>
@@ -73,4 +90,4 @@ function Venue() {
   )
 }
 
-export default Venue
+export default VenueList;
