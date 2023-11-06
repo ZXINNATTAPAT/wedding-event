@@ -1,6 +1,6 @@
 .home{
     height: 70vh;
-    background:linear-gradient(rgba(33,33,33,0.522),rgba(33,33,33,0.522)), url('../../assets/home.jpg') ;
+    background:linear-gradient(rgba(33,33,33,0.522),rgba(33,33,33,0.522)), url('../../../assets//home.jpg') ;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

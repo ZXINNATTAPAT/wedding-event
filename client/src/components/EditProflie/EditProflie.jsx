@@ -1,5 +1,6 @@
 import React from 'react'
 import NavbarUser from '../Navbar-user/NavbarUser'
+import { Link } from "react-router-dom";
 
 const EditProflie = () => {
     return (
@@ -13,19 +14,8 @@ const EditProflie = () => {
             <h1>Edit Profile</h1>
             <hr />
             <div className="row">
-                {/* ด้านซ้าย */}
-                <div className="col-md-3">
-                    <div className="text-center">
-                        <img
-                            src="//placehold.it/150"
-                            className="avatar img-circle"
-                        />
-                        <br/><br/>
-                        <input type="file" className="form-control" />
-                    </div>
-                </div>
-
-                {/* ด้านขวา */}
+                <div className="col-md-3"></div>
+                
                 <div className="col-md-9 personal-info">
                     <h3>Personal info</h3>
                     <form className="form-horizontal" role="form">
@@ -62,9 +52,13 @@ const EditProflie = () => {
                         <div className="form-group">
                             <label className="col-md-3 control-label"></label>
                             <div className="col-md-8">
-                                <input type="button" className="btn btn-primary" value="Save Changes" />
+                                <Link to="/profile">
+                                    <input type="button" className="btn btn-primary" value="Save Changes" />    
+                                </Link>          
                                 <span></span>
-                                <input type="reset" className="btn btn-default" value="Cancel" />
+                                <Link to="/profile">
+                                    <input type="reset" className="btn btn-default" value="Cancel" />
+                                </Link>            
                             </div>
                         </div>
                     </form>

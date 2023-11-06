@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
 import './navbar.css'
 import { BsHeartPulseFill } from "react-icons/bs";
 import {AiFillCloseCircle} from "react-icons/ai"
@@ -53,7 +53,13 @@ const Navbar = () => {
                                 <Link to='/login'>เข้าสู่ระบบ / สมัครสมาชิก</Link>
                             </button>
      
-                        </div>               
+                        </div>       
+                        <div className="headerBtns flex" style={{padding:5}}>
+                            <button className='btn loginBtn'>
+                                <Link to='/login-admin'>เข้าสู่ระบบพนักงาน</Link>
+                            </button>
+     
+                        </div>          
                     </ul>
 
                     <div onClick={removeNav} className="closeNavbar">

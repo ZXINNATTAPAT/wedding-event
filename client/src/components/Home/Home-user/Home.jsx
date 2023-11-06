@@ -1,10 +1,11 @@
 import './home.css'
-import Navbar from "../Navbar/Navbar";
-
+import NavbarUser from '../../Navbar-user/NavbarUser'
+import Popular from '../../Popular/Popular'
+import  Pagination  from '../../Pagination/Paginations'
 const Home = () => {
     return(
         <>
-        <Navbar/>
+        <NavbarUser/>
         <section className='home'>
             <div className="secContainer container">
                 <div className="homeText">
@@ -31,6 +32,8 @@ const Home = () => {
                 </div>
             </div>
         </section>
+        <Popular/>
+        <Pagination/>
         </>
     )
 }

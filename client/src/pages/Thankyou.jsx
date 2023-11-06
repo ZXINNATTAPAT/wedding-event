@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar/Navbar";
+import NavbarUser from "../components/Navbar-user/NavbarUser";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 const Thankyou = () => {
   return (
     <>
-    <Navbar/>
+    <NavbarUser/>
     <br />
     <br />
     <div className="vh-100 d-flex justify-content-center align-items-center">
