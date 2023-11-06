@@ -6,7 +6,7 @@ import { BsTrash3Fill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
 function Status() {
-  const [status, setStatus] = useState("รอดำเนินการ"); //ถ้าสถานะเป็นเสร็จสิ้นจะขึ้นปุ่มรีวิว
+  const [status, setStatus] = useState("เสร็จสิ้น"); //ถ้าสถานะเป็นเสร็จสิ้นจะขึ้นปุ่มรีวิว
   const [showCancelButton, setShowCancelButton] = useState(true);
 
   const handleCancelButton = () => {
@@ -51,7 +51,7 @@ function Status() {
                 )}
                 {status === "เสร็จสิ้น" && (
                   <div className="d-flex justify-content-center m-3">
-                    <Link to="/roomdetail/1">
+                    <Link to={`/roomdetail/1?status=${status}`}>
                       <Button
                         className="d-flex justify-content-center align-items-center"
                         variant="primary"
