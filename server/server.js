@@ -12,6 +12,7 @@ const Payment = require("./Payment.js");
 const AdminHome = require("./AdminHome.js");
 const Review = require("./Review.js");
 const ShowReview = require("./ShowReview.js");
+const Booking = require("./Booking.js");
 
 
 // const { default: EditProflie } = require('../client/src/components/EditProflie/EditProflie');
@@ -47,7 +48,7 @@ app.listen(5000, ()=>{
 //         }
 //     })
 // })
-
+app.use("/", Booking);
 app.use("/", login);
 app.use("/", Venue);
 app.use("/", editUser);
@@ -55,7 +56,6 @@ app.use("/", Payment);
 app.use("/", AdminHome);
 app.use("/", Review);
 app.use("/", ShowReview);
-
 
 // app.get('/', editUser ,(req, res) => {
 //     res.send(EditProflie.EditProflie());

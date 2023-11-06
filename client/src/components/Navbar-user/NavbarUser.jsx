@@ -1,9 +1,10 @@
-import  { useState } from "react";
+import { useState } from "react";
 import "./navbar-user.css";
 import { BsHeartPulseFill } from "react-icons/bs";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { PiArticleBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const NavbarUser = () => {
   //toggle show navbar
@@ -16,6 +17,22 @@ const NavbarUser = () => {
   const removeNav = () => {
     setActive("navBar");
   };
+
+  const customerLogout = () => {
+
+    axios.get("http://localhost:5000/customerlogout", {withCredentials: true}, {
+    }).then((response) => {
+      if (response.data.status == 'ok') {
+        alert('Logout successful');
+        window.location = "/";
+      } else {
+        alert('Logout failed')
+      }
+    })
+
+
+  }
+
 
   //add background color to header
   const [transparent, setTransparent] = useState("header");
@@ -67,7 +84,7 @@ const NavbarUser = () => {
               </Link>
             </li>
             <li className="navItem">
-              <Link to="/">
+              <Link to="#" onClick={customerLogout}>
                 <a className="navLink">ออกจากระบบ</a>
               </Link>
             </li>

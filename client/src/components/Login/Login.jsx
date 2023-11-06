@@ -4,7 +4,7 @@ import userIcon from '../../assets/person.png';
 import emailIcon from '../../assets/email.png';
 import passwordIcon from '../../assets/password.png';
 import { BsFillTelephoneFill } from "react-icons/bs";
-import Axios from "axios";
+import axios from "axios";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -14,44 +14,49 @@ const Login = () => {
     const [loginStatus, setLoginStatus] = useState("");
     const [action, setAction] = useState("Login");
 
-    Axios.defaults.withCredentials = true;
+    axios.defaults.withCredentials = true;
 
     const customerRegister = () => {
-        Axios.post("http://localhost:5000/customerregister", {
+        axios.post("http://localhost:5000/customerregister", {
             username: username,
             email: email,
             password: password,
             phoneno: phoneno,
         }).then((response) => {
+            if (response.data.status == 'ok') {
+                alert('register successful');
+                window.location = 'login';
+            }
             console.log(response);
         });
     }
 
     const customerLogin = () => {
 
-        Axios.post("http://localhost:5000/customerlogin", {
+        axios.post("http://localhost:5000/customerlogin", {
             email: email,
             password: password,
         }).then((response) => {
-            window.location = '/';
-            alert('Login successful');
-            if (response.data.message) {
-                setLoginStatus(response.data.message);
+            if (response.data.status == 'ok') {
+                window.location = '/Home';
+                alert('Login successful');
+                // setLoginStatus(response.data.message);
             } else {
-                setLoginStatus(response.data[0].username);
+                alert('Login failed')
             }
         })
 
 
     }
 
-    useEffect(() => {
-        Axios.get("http://localhost:5000/customerlogin").then((response) => {
-            if (response.data.loggedIn == true) {
-                setLoginStatus(response.data.customer[0].Email);
-            }
-        });
-    }, []);
+    // useEffect(() => {
+    //     axios.get("http://localhost:5000/customerlogin").then((response) => {
+    //         if (response.data.loggedIn == true) {
+                
+    //             setLoginStatus(response.data.customer[0].Email);
+    //         }
+    //     });
+    // }, []);
 
 
     return (

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
 import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
@@ -18,6 +18,8 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import NavbarUser from "../components/Navbar-user/NavbarUser";
+import axios from "axios";
+import Photographer from "../components/admin/Photographer";
 
 function Booking() {
   const [bookingData, setBookingData] = useState({
@@ -29,6 +31,20 @@ function Booking() {
     numOfPhotos: "",
     genreOfMusic: "",
   });
+  const [getMusic, setMusic] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/getmusic")
+    .then((response) => response.json())
+    .then((data) => {
+      // map the response data to a new array that includes both CourtType and CourtNumber
+      const getMusic = data.map((music) => ({
+        Genre: music.Genre,
+      }));
+      setMusic(getMusic);
+    })
+    .catch((error) => console.log(error));
+  }, [])
 
   const handleChange = (e) => {
     const { target } = e;
@@ -207,13 +223,16 @@ function Booking() {
                         id="demo-simple-select-helper"
                         defaultValue="undefined"
                         name="genreOfMusic"
+                        // getOptionLabel={(option) => option.music}
+                        // value={{ TimeList: getMusic }}
                         onChange={handleChange}
                       >
-                        <MenuItem value={"Jazz"}>Jazz</MenuItem>
+
+                        {/* <MenuItem value={"Jazz"}>Jazz</MenuItem>
                         <MenuItem value={"R&B"}>R&B</MenuItem>
                         <MenuItem value={"Blues"}>Blues</MenuItem>
                         <MenuItem value={"Soul"}>Soul</MenuItem>
-                        <MenuItem value={"Pop music"}>Pop music</MenuItem>
+                        <MenuItem value={"Pop music"}>Pop music</MenuItem> */}
                       </Select>
                     </FormControl>
                   </div>

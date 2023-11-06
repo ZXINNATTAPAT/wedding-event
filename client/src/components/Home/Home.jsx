@@ -1,5 +1,5 @@
 import Navbar from "../Navbar/Navbar";
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './home.css';
 // import Popular from '../Popular/popular';
@@ -9,6 +9,20 @@ const Home = () => {
   const [filteredResults, setFilteredResults] = useState([]);
   const [price, setPrice] = useState('');
   const [capacity, setCapacity] = useState('');
+  const [loginStatus, setLoginStatus] = useState("");
+
+  
+  // axios.defaults.withCredentials = true;
+
+//   useEffect(() => {
+//     axios.get("http://localhost:5000/customerlogin").then((response) => {
+//         if (response.data.loggedIn == true) {
+//           setLoginStatus(response.data.customer[0].Email);
+//         }
+//     })  .catch((error) => {
+//       console.error("Error while making the request:", error);
+//     });
+// }, []);
 
   const handlePriceChange = (e) => {
     setPrice(e.target.value);
@@ -37,58 +51,60 @@ const Home = () => {
   }
 
   return (
-        <>
-        <Navbar/>
-    <section className='home'>
-      <div className="secContainer container">
-        <div className="homeText">
-          <h1 className="title">
-            Plan your wedding with us
-          </h1>
-          <p className="subTitle">
-            รวมสถานที่จัดงานแต่งงานและงานอีเว้นท์ครบวงจร
-          </p>
+    <>
+      <Navbar />
+      <section className='home'>
+        <div className="secContainer container">
+          <div className="homeText">
+            <h1 className="title">
+              Plan your wedding with us
+            </h1>
+            <p className="subTitle">
+              รวมสถานที่จัดงานแต่งงานและงานอีเว้นท์ครบวงจร
+              
+            </p>
+            <h1>{loginStatus}</h1>
+          </div>
+
+          <div className="homeCard grid">
+            <div className="PriceDiv">
+              <input
+                className='homeInput'
+                type='text'
+                placeholder='  ราคา'
+                value={price}
+                onChange={handlePriceChange}
+              />
+            </div>
+
+            <div className="NumDiv">
+              <input
+                className='homeInput'
+                type='text'
+                placeholder='  จำนวนคน'
+                value={capacity}
+                onChange={handleCapacityChange}
+              />
+            </div>
+
+            {/* <button className='btn' onClick={searchAndFilterData}>ค้นหา</button> */}
+            {/* <Link to=''><button className='btn' onClick={searchAndFilterData}>ค้นหา</button></Link> */}
+            <button className='btn' onClick={() => searchAndFilterData()}>ค้นหา</button>
+            {/* <Link to='/Filter'><button className='btn'>ค้นหา</button></Link> */}
+
+          </div>
+          <div>
+            {filteredResults.map((result) => (
+              <div key={result.id}>
+                <p>ราคา: {result.VenuePrice}</p>
+                <p>จำนวนคน: {result.MaxCapacity}</p>
+                {/* แสดงข้อมูลอื่น ๆ ตามความต้องการ */}
+              </div>
+            ))}
+          </div>
         </div>
-
-        <div className="homeCard grid">
-          <div className="PriceDiv">
-            <input
-              className='homeInput'
-              type='text'
-              placeholder='  ราคา'
-              value={price}
-              onChange={handlePriceChange}
-            />
-          </div>
-
-          <div className="NumDiv">
-            <input
-              className='homeInput'
-              type='text'
-              placeholder='  จำนวนคน'
-              value={capacity}
-              onChange={handleCapacityChange}
-            />
-          </div>
-
-          {/* <button className='btn' onClick={searchAndFilterData}>ค้นหา</button> */}
-          {/* <Link to=''><button className='btn' onClick={searchAndFilterData}>ค้นหา</button></Link> */}
-          <button className='btn' onClick={() => searchAndFilterData()}>ค้นหา</button>
-          {/* <Link to='/Filter'><button className='btn'>ค้นหา</button></Link> */}
-
-      </div>
-      <div>
-        {filteredResults.map((result) => (
-          <div key={result.id}>
-            <p>ราคา: {result.VenuePrice}</p>
-            <p>จำนวนคน: {result.MaxCapacity}</p>
-            {/* แสดงข้อมูลอื่น ๆ ตามความต้องการ */}
-          </div>
-        ))}
-        </div>
-      </div>
-    </section>
-        </>
+      </section>
+    </>
   );
 }
 
