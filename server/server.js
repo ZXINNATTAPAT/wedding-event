@@ -6,7 +6,11 @@ const db = require("./database");
 const login = require("./login.js");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: ["http://localhost:5173"],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 

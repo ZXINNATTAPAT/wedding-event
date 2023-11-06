@@ -41,11 +41,11 @@ login.get("/customer", (req, res) => {
     });
 });
 
-login.post("/register", jsonParser, (req, res, next) => {
+login.post("/customerregister", jsonParser, (req, res, next) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    const phoneNo = req.body.phoneNo;
+    const phoneNo = req.body.phoneno;
 
     bcrypt.hash(password, saltRounds, function (err, hash) {
         db.execute(
@@ -60,6 +60,14 @@ login.post("/register", jsonParser, (req, res, next) => {
             }
         );
     });
+});
+
+login.get("/customerlogin", (req, res) => {
+    if (req.session.customer) {
+        res.send({ loggedIn: true, customer: req.session.customer });
+    } else {
+        res.send({ loggedIn: false });
+    }
 });
 
 login.post("/customerlogin", jsonParser, function (req, res, next) {
@@ -82,6 +90,7 @@ login.post("/customerlogin", jsonParser, function (req, res, next) {
                 if (isLogin) {
                     req.session.customer = customer;
                     console.log(req.session.customer);
+                    // res.send(customer);
                     res.json({ status: "ok", message: "login success" });
                 } else {
                     res.json({ status: "error", message: "login failed" });
