@@ -3,33 +3,34 @@
     justify-content: center;
     align-items: center;
     height: 30rem;
-    width: 30rem; 
-    margin: 0 auto; 
+    width: 30rem;
+    margin: 0 auto;
     box-shadow: 5px 5px 10px #c1c1c1;
 }
 
-.detail1{
+.detail1 {
     padding-top: 3rem;
-    padding-left: 10rem;   
+    padding-left: 10rem;
     line-height: 2.5rem;
 }
 
-.detail2{
+.detail2 {
     height: 25rem;
     background-color: rgb(255, 238, 240);
     margin-top: 1.5rem;
 }
 
-.detail2text{
-    padding-left: 10rem;   
+.detail2text {
+    padding-left: 10rem;
     line-height: 2.5rem;
 }
-.detail2text h3{
+
+.detail2text h3 {
     text-align: center;
     padding-top: 1.5rem;
 }
 
-.chooseroom{
+.chooseroom {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,12 +46,13 @@
     margin-top: 2rem;
     margin-left: auto;
     margin-right: 3rem;
-    &:hover{
+
+    &:hover {
         background-color: lightcoral;
     }
 }
 
-.box-container{
+.box-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,7 +60,7 @@
     width: 100%;
 }
 
-.box{
+.box {
     width: 100%;
     box-shadow: 2px 2px 30px rgb(0, 0, 0, 0.1);
     background-color: rgb(255, 238, 240);
@@ -67,48 +69,50 @@
     cursor: pointer;
 }
 
-.name-user strong{
+.name-user strong {
     font-size: 1.1rem;
 }
 
-.stars{
+.stars {
     color: #f9d71c;
     font-size: 1.3rem;
 }
 
-.box-top{
+.box-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2opx;
 }
-.comment{
+
+.text-comment {
     margin-top: 1rem;
 }
 
-.comment p{
+.text-comment p {
     font-size: 0.9rem;
+    font-weight: 500;
     color: #4b4b4b;
 }
 
-.reviews{
+.comments {
     margin-top: 4rem;
 }
 
-.reviews h2{
+.comments h2 {
     font-weight: 600;
     padding-left: 1rem;
     padding-bottom: 1rem;
 }
 
-.user-reviews h2{
+.user-reviews h2 {
     font-weight: 600;
     padding-top: 2rem;
     padding-left: 1rem;
     padding-bottom: 1rem;
 }
 
-.text-comment{
+.text-review {
     padding-left: 1rem;
     padding-bottom: 2rem;
 }
@@ -116,5 +120,3 @@
 textarea.form-control {
     max-width: 98%;
 }
-
-  
