@@ -1,21 +1,74 @@
 import { useState } from "react";
-import Toast from "react-bootstrap/Toast";
-import Button from "react-bootstrap/Button";
 import NavbarUser from "../components/Navbar-user/NavbarUser";
-import { BsTrash3Fill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { DataGrid } from "@mui/x-data-grid";
+import Button from "@mui/material/Button";
+
+
+
+
 
 function Status() {
-  const [status, setStatus] = useState("เสร็จสิ้น"); //ถ้าสถานะเป็นเสร็จสิ้นจะขึ้นปุ่มรีวิว
+  const [rows, setRows] = useState([
+    {
+      id: 1,
+      BrideName: "Snow",
+      GroomName: "Jon",
+      EventDate: new Date("2022-12-21"),
+      Status: "เสร็จสิ้น",
+    },
+    {
+      id: 2,
+      BrideName: "Snow",
+      GroomName: "Jon",
+      VenueID: "ห้อง 1",
+      EventDate: new Date("2022-12-21"),
+      EventStartTime: "10:00 AM",
+      EventEndTime: "2:00 PM",
+      NumofGuest: 100,
+      NumofPho: 2,
+      GenreOfmusic: "jazz",
+      Status: "รอดำเนินการ",
+    },
+    
+  ]);
+
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 10 },
+    { field: "BrideName", headerName: "Bride name", width: 130 },
+    { field: "EventDate", headerName: "Event Date", type: "date", width: 100 },
+    { field: "Status", headerName: "Status", width: 100 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      width: 150,
+      renderCell: (params) => (
+        params.row.Status === "เสร็จสิ้น" ? (
+          <Button variant="contained" color="primary" component={Link} to={`/roomdetail/${params.row.id}`}>รีวิว</Button>
+        ) : (
+          <Button variant="contained" color="error" onClick={() => handleCancelButton(params.row.id)}>ยกเลิก</Button>
+        )
+      ),
+    },
+  ];
+
+ 
+
   const [showCancelButton, setShowCancelButton] = useState(true);
 
-  const handleCancelButton = () => {
+  const handleCancelButton = (rowId) => {
     const confirmed = window.confirm(
       "แน่ใจนะว่าจะยกเลิก? ทางเราจะไม่คืนเงินทุกกรณี"
     );
-
+  
     if (confirmed) {
-      setStatus("คุณยังไม่ทำการจอง");
+      // Update the Status field for the row with the given ID to "ยกเลิกแล้ว"
+      setRows((prevRows) =>
+        prevRows.map((row) =>
+          row.id === rowId ? { ...row, Status: "ยกเลิกแล้ว" } : row
+        )
+      );
       setShowCancelButton(false);
     }
   };
@@ -32,40 +85,18 @@ function Status() {
           <div className="card mb-4">
             <h5 className="card-header">ตรวจสอบสถานะ</h5>
             <div className="card-body">
-              <Toast className="m-3">
-                <Toast.Header closeButton={false}>
-                  <strong className="me-auto">สถานะ</strong>
-                </Toast.Header>
-                <Toast.Body>{status}</Toast.Body>
-                {status === "รอดำเนินการ" && showCancelButton && (
-                  <div className="d-flex justify-content-center m-3">
-                    <Button
-                      className="d-flex justify-content-center align-items-center"
-                      variant="danger"
-                      onClick={handleCancelButton}
-                    >
-                      <BsTrash3Fill />
-                      ยกเลิก
-                    </Button>
-                  </div>
-                )}
-                {status === "เสร็จสิ้น" && (
-                  <div className="d-flex justify-content-center m-3">
-                    <Link to={`/roomdetail/1?status=${status}`}>
-                      <Button
-                        className="d-flex justify-content-center align-items-center"
-                        variant="primary"
-                      >
-                        รีวิว
-                      </Button>
-                    </Link>
-                  </div>
-                )}
-              </Toast>
+            <div style={{ height: 400, width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+          />
+        </div>
+              
             </div>
           </div>
         </div>
       </div>
+      
     </>
   );
 }
