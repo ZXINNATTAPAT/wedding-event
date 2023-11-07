@@ -42,6 +42,7 @@ function Booking() {
   });
   const [getMusic, setMusic] = useState([]);
   const [getPhotographer, setPhotographer] = useState([]);
+  const [getbookingID, setBookingID] = useState('');
 
   useEffect(() => {
     axios.get("http://localhost:5000/Musicdata")
@@ -67,17 +68,27 @@ function Booking() {
 
   // localStorage.setItem("CustomerID", CustomerID)
   // console.log(CustomerID); 
-  const test = CustomerID.CustomerID
-    localStorage.setItem("CustomerID", test)
-  console.log(test)
-  
+  // const test = CustomerID.CustomerID
+  //   localStorage.setItem("CustomerID", test)
+  // console.log(test)
   const handleChange = (e) => {
     const { target } = e;
     const { name, value } = target;
-
     setBookingData({
       ...bookingData,
       [name]: value,
+    });
+  }
+  const handleMusic = (e) => {
+    const { target } = e;
+    const { name, value } = target;
+
+    const selectedMusic = getMusic.find((musicOption) => musicOption.Genre === value);
+    const musicID = selectedMusic ? selectedMusic.MusicID : '';
+
+    setBookingData({
+      ...bookingData,
+      [name]: musicID,
     });
     // console.log("name "+ name) //test log
     // console.log("value "+ value)
@@ -105,23 +116,23 @@ function Booking() {
   const photographerChange = (event) => {
     const { name, value } = event.target;
 
+    const selectedPhotographer = getPhotographer.find((PhotographerOption) => PhotographerOption.NumberofPH === value);
+    const photographerID = selectedPhotographer ? selectedPhotographer.PhotographerID : '';
+
     setBookingData((prevBookingData) => ({
       ...prevBookingData,
-      [name]: [...prevBookingData[name], value], // Add the selected ID to the array
+      [name]: photographerID, // Add the selected ID to the array
     }));
 
   };
-  const musicGenreChange = (newValue) => {
-    setBookingData({
-      ...bookingData,
-      MusicID: newValue,
-    });
-  };
+
 
   const book = () => {
     axios.post("http://localhost:5000/createbooking", bookingData)
     .then((response) => {
+      setBookingID(response.data)
       console.log("Booking data sent successfully:", response.data);
+
     })
     .catch((error) => {
       console.error("Error sending booking data:", error);
@@ -130,9 +141,13 @@ function Booking() {
   
   }
 
+  const BookingID = JSON.stringify(getbookingID);
+  console.log(BookingID)
+  localStorage.setItem("BookingID", BookingID)
+
   // console.log("booking data", bookingData);
   // console.log("getmusic", getMusic)
- console.log(CustomerID)
+ //console.log(CustomerID)
 
   return (
     <>
@@ -282,7 +297,7 @@ function Booking() {
                           defaultValue="undefined"
                           name="MusicID"
                           value={bookingData.MusicID}
-                          onChange={handleChange}
+                          onChange={handleMusic}
                           // onClick={musicGenreChange}
                         >
                           {getMusic.map((musicOption) => (
