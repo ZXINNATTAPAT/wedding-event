@@ -90,8 +90,6 @@ function Status() {
         )
       );
       axios.post("http://localhost:5000/cancelbooking", {
-        // email: email,
-        // password: password,
       }).then(response => response.json())
       setShowCancelButton(false);
     }

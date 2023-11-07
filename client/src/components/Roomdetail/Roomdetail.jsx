@@ -116,6 +116,13 @@ const Roomdetail = () => {
         return <div>Room not found</div>;
     }
 
+    const selectedID = () => {
+        localStorage.setItem('VenueID', roomId);
+        // const venue = localStorage.getItem('VenueID')
+        // console.log(venue)
+    }
+    selectedID();
+
     const submitReview = () => {
         axios.post('/review', { reviewText })
             .then(response => {

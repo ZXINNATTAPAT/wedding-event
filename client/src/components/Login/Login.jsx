@@ -39,8 +39,8 @@ const Login = () => {
             if (response.data.status == 'ok') {
                 window.location = '/Home';
                 alert('Login successful');
-                const CustomerID = response.data.CustomerID;
-                localStorage.setItem('CustomerID', CustomerID);
+                //const CustomerID = response.data.CustomerID;
+                // localStorage.setItem('CustomerID', CustomerID);
                 localStorage.setItem('Email', email);
                 // setLoginStatus(response.data.message);
             } else {
@@ -48,32 +48,6 @@ const Login = () => {
             }
         })
     }
-
-    // const test = () => {
-    //     const sessionCookie = document.cookie;
-    //     const apiEndpoint = 'http://localhost:5000/test'
-    //     const requestData = { key: 'email' }
-    //     const config = {
-    //         headers: {
-    //             'Cookie': sessionCookie,
-    //         }
-    //     }
-    //     axios.post(apiEndpoint, requestData, config)
-    //         .then(response => {
-    //             console.log(response.data);
-    //         })
-    // }
-
-
-    // useEffect(() => {
-    //     axios.get("http://localhost:5000/customerlogin").then((response) => {
-    //         if (response.data.loggedIn == true) {
-
-    //             setLoginStatus(response.data.customer[0].Email);
-    //         }
-    //     });
-    // }, []);
-
 
     return (
         <div className="Container">
@@ -99,7 +73,7 @@ const Login = () => {
 
                 <div className="Input">
                     <img src={passwordIcon} alt="" />
-                    <input className='input' id='password' type="password" placeholder='Password' onChange={(e) => { setPassword(e.target.value); }} />
+                    <input className='input' id='password' type="password" placeholder='Password' pattern='^(?=.[A-Z])(?=.\d)(?=.[\W_]).$' onChange={(e) => { setPassword(e.target.value); }} />
                 </div>
 
                 {action === "Login" ? <div></div> :

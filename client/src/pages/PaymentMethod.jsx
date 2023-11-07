@@ -71,7 +71,18 @@ function PaymentMethod() {
       .catch((error) => {
         console.error('Error fetching payment methods:', error);
       });
+
+    axios.get("http://localhost:5000/getbookingdetail")
+      .then((response) => {
+        console.log(response.data);
+        setRoomdetail(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching room details:', error);
+      });
   }, []);
+
+
 
   const handlePaymentMethod = (e) => {
     setSelectedMethod(e.target.value);
@@ -88,7 +99,8 @@ function PaymentMethod() {
       <br />
       <br />
       <Grid container spacing={1}>
-        <Grid item xs={12} sm={6}>
+      {roomdetail.map((detail, index) => (
+        <Grid item xs={12} sm={6} key={index}>
           <Paper
             sx={{
               p: 2,
@@ -118,22 +130,22 @@ function PaymentMethod() {
               <Grid item xs={12} container direction="column" spacing={2}>
                 <Grid item xs>
                   <Typography gutterBottom variant="subtitle1">
-                    ชื่อห้อง
+                    ชื่อห้อง: {detail.VenueName}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    วันที่
+                    วันที่: {detail.EventDate}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    เวลา
+                    เวลา: {detail.EventStartTime}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    จำนวนคน
+                    จำนวนคน: {detail.NumofGuest}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    จำนวนช่างถ่ายรูป
+                    จำนวนช่างถ่ายรูป: {detail.NumberofPH}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    ประเภทดนตรี
+                    ประเภทดนตรี: {detail.Genre}
                   </Typography>
                 </Grid>
                 <Grid item sx={{ textAlign: "center" }}>
@@ -145,6 +157,7 @@ function PaymentMethod() {
             </Grid>
           </Paper>
         </Grid>
+      ))}
         <Grid item xs={12} sm={6}>
           <TableContainer>
             <Table

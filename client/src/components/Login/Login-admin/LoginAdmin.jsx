@@ -11,7 +11,6 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [phoneno, setPhoneNo] = useState("");
     const [password, setPassword] = useState("");
-    const [loginStatus, setLoginStatus] = useState("");
     const [action, setAction] = useState("Login");
 
     axios.defaults.withCredentials = true;
@@ -40,7 +39,7 @@ const Login = () => {
             if (response.data.status == 'ok') {
                 window.location = '/Admin';
                 alert('Login successful');
-                setLoginStatus(response.data.message);
+                // setLoginStatus(response.data.message);
             } else {
                 alert('Login failed')
                 // setLoginStatus(response.data[0].username);
@@ -50,13 +49,6 @@ const Login = () => {
 
     }
 
-    useEffect(() => {
-        axios.get("http://localhost:5000/adminlogin").then((response) => {
-            if (response.data.loggedIn == true) {
-                setLoginStatus(response.data.customer[0].Email);
-            }
-        });
-    }, []);
 
     return (
         <div className="Container">
@@ -97,7 +89,7 @@ const Login = () => {
             ) : (
                 <button className="BottomButton" onClick={AdminRegister}>Sign up</button>
             )}
-            <h1>{loginStatus}</h1>
+
         </div>
 
     );

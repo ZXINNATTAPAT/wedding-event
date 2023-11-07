@@ -23,6 +23,7 @@ import Profile from "./components/Profile/Profile.jsx";
 import Review from "./components/admin/Review.jsx";
 import AdminUser from "./components/admin/AdminUser.jsx";
 import StarRating from "./components/StarRating/StarRating.jsx";
+import Protected from './components/protected.jsx'
 
 const router = createBrowserRouter([
   {
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Home />,
+    element: <Protected element = {<Home/>}/>,
   },
   {
     path: "/login",

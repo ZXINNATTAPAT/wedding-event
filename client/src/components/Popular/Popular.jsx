@@ -63,6 +63,7 @@ const Popular = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage, setPostPerPage] = useState(8);
 
+
   useEffect(() => {
     axios.get('http://localhost:5000/venue')
       .then(response => {
@@ -76,6 +77,12 @@ const Popular = () => {
   const lastPostIndex = currentPage * postPerPage;
   const firstPostIndex = lastPostIndex - postPerPage;
   const currentPosts = places.slice(firstPostIndex, lastPostIndex);
+
+  // const selectedID = (VenueID) => {
+  //   localStorage.setItem('VenueID', VenueID);
+  //   const venue = localStorage.getItem('VenueID')
+  //   console.log(venue)
+  // }
 
   return (
     <>
@@ -101,6 +108,7 @@ const Popular = () => {
                       <p>จำนวนคน {MaxCapacity} คน</p>
                     </div>
                     <button className="btn">
+                    {/* <Link to={`/roomdetail/${VenueID}`} onClick={selectedID(VenueID)}>รายละเอียดเพิ่มเติม</Link> */}
                       <Link to={`/roomdetail/${VenueID}`}>รายละเอียดเพิ่มเติม</Link>
                     </button>
                   </div>
