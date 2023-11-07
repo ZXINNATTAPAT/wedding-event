@@ -20,10 +20,11 @@ import Photographer from "./components/admin/Photographer.jsx";
 import User from "./components/admin/User.jsx";
 import Home from "./components/Home/Home-user/Home.jsx";
 import Profile from "./components/Profile/Profile.jsx";
-import Review from "./components/admin/Review.jsx";
+// import Review from "./components/admin/Review.jsx";
 import AdminUser from "./components/admin/AdminUser.jsx";
 import StarRating from "./components/StarRating/StarRating.jsx";
 import Review from "./components/StarRating/Review.jsx";
+import AdminReview from "./components/admin/AdminReview.jsx"
 
 const router = createBrowserRouter([
   {
@@ -107,8 +108,8 @@ const router = createBrowserRouter([
     element: <User />,
   },
   {
-  path: "/review",
-    element: <Review />,
+  path: "/Adminreview",
+    element: <AdminReview />,
   },
   {
     path: "/adminUser",

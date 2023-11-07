@@ -19,10 +19,8 @@ const EditProflie = () => {
         {
             CustomerID: CustomerID,
           Username: Username,
-          Password: Password,
           Email: Email,
           PhoneNO: PhoneNO,
-          confirmPassword: confirmPassword
         }
       );
 
@@ -92,7 +90,7 @@ const EditProflie = () => {
                 />
               </div>
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label className="col-md-3 control-label">Password:</label>
               <div className="col-md-8">
                 <input
@@ -113,7 +111,7 @@ const EditProflie = () => {
                   onChange={(e) => setconfirmPassword(e.target.value)}
                 />
               </div>
-            </div>
+            </div> */}
             <div className="form-group">
               <label className="col-md-3 control-label"></label>
               <div className="col-md-8">

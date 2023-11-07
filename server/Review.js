@@ -15,8 +15,21 @@ const jsonParser = bodyParser.json();
 //     });
 // });
 
-Review.post("/Review", (req, res) => {
-    // console.log("ราคาที่ส่งมา:", CustomerID);
+// Review.post("/Review/:Email", (req, res) => {
+//     // console.log("ราคาที่ส่งมา:", CustomerID);
+//     db.query("INSERT INTO review (Score, Description,BookingID) VALUES (?, ?, ?);",[req.body.Score, req.body.Description,req.body.BookingID], (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             console.log(result); // แสดงผลลัพธ์ใน console
+//             res.send(result);
+//         }
+//     });
+// });
+
+Review.get("/Review/:Email", (req, res) => {
+    const Email = req.params.Email;
+    console.log("ค่าที่ส่งมา:", Email);
     db.query("INSERT INTO review (Score, Description,BookingID) VALUES (?, ?, ?);",[req.body.Score, req.body.Description,req.body.BookingID], (err, result) => {
         if (err) {
             console.log(err);

@@ -10,7 +10,7 @@ editUser.post("/editUser/:customerID", jsonParser, (req, res) => {
     // const hash = bcrypt.hashSync(Password, 10);
 
     // ทำการอัปเดตข้อมูลในฐานข้อมูลด้วย db.query
-    db.query("UPDATE customer SET Username = ?,Email = ?, Password = ?, PhoneNO = ? WHERE CustomerID = ?;", [req.body.Username,req.body.Email,req.body.Password, req.body.PhoneNO, req.body.CustomerID], (err, result) => {
+    db.query("UPDATE customer SET Username = ?,Email = ?, PhoneNO = ? WHERE CustomerID = ?;", [req.body.Username,req.body.Email, req.body.PhoneNO, req.body.CustomerID], (err, result) => {
         if (err) {
             console.log(err);
             res.status(500).send("เกิดข้อผิดพลาดในการแก้ไขข้อมูลผู้ใช้");

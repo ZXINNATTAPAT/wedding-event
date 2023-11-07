@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const UserProfile = express();
 const jsonParser = bodyParser.json();
 
-UserProfile.post("/UserProfile/:CustomerID", (req, res) => {
-    const CustomerID = req.params.CustomerID;
-    console.log("ราคาที่ส่งมา:", CustomerID);
-    db.query("SELECT Username, PhoneNo, Email FROM `customer` WHERE CustomerID = ?",[CustomerID], (err, result) => {
+UserProfile.get("/UserProfile/:Email", (req, res) => {
+    const Email = req.params.Email;
+    console.log("ราคาที่ส่งมา:", Email);
+    db.query("SELECT Username, PhoneNo, Email FROM `customer` WHERE Email = ?",[Email], (err, result) => {
         if (err) {
             console.log(err);
         } else {

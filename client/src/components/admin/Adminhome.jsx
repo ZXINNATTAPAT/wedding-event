@@ -194,10 +194,10 @@ const Adminhome = () => {
             ))}
           </List>
           <List>
-            {["User", "Review"].map((text, index) => (
+            {["User", "AdminReview"].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <Link
-                  to={text === "User" ? "/user-list" : "/review"}
+                  to={text === "User" ? "/user-list" : "/Adminreview"}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <ListItemButton

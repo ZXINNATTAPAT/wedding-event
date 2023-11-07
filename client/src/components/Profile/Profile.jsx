@@ -5,22 +5,22 @@ import NavbarUser from '../Navbar-user/NavbarUser';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
+    const getEmail = localStorage.getItem("Email");
     const [Username, setUsername] = useState('');
     const [PhoneNO, setPhoneNO] = useState('');
-    const [Email, setEmail] = useState('');
-    const [CustomerID, setCustomerID] = useState(''); // Assuming 1 is the default ID
+    const [Email, setEmail] = useState(getEmail);
+    // const [CustomerID, setCustomerID] = useState(''); // Assuming 1 is the default ID
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/UserProfile/${CustomerID}`)
+        axios.get(`http://localhost:5000/UserProfile/${Email}`)
             .then(response => {
-                setUsername(response.data.Username);
-                setPhoneNO(response.data.PhoneNO);
-                setEmail(response.data.Email);
+                setUsername(response.data[0].Username); // ตรงนี้เลือกข้อมูลที่จะแสดง
+                    setPhoneNO(response.data[0].PhoneNo); // ตรงนี้เลือกข้อมูลที่จะแสดง
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
-    }, [CustomerID]);
+    }, [Email]);
 
     return (
         <>
