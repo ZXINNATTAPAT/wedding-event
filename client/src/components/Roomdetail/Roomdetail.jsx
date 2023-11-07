@@ -12,6 +12,9 @@ import { IoMdCheckmark } from "react-icons/io"
 import { AiFillStar } from "react-icons/ai"
 import { AiOutlineStar } from "react-icons/ai"
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 
 const Data = [
     {
@@ -107,10 +110,24 @@ const Roomdetail = () => {
     const query = new URLSearchParams(location.search);
     const status = query.get('status');
     const isReviewEnabled = status === 'เสร็จสิ้น';
+    const [reviewText, setReviewText] = useState('');
 
     if (!roomData) {
         return <div>Room not found</div>;
     }
+
+    const submitReview = () => {
+        axios.post('/review', { reviewText })
+            .then(response => {
+                // ดำเนินการตามที่ต้องการหลังจากส่งข้อมูลสำเร็จ
+                console.log('รีวิวถูกส่งไปยัง backend แล้ว:', response);
+                // ทำอย่างอื่นต่อที่ต้องการ
+            })
+            .catch(error => {
+                // ดำเนินการเมื่อมีข้อผิดพลาดในการส่งข้อมูล
+                console.error('เกิดข้อผิดพลาดในการส่งรีวิว:', error);
+            });
+    };
 
     return (
         <>
@@ -209,9 +226,15 @@ const Roomdetail = () => {
                     <StarRating/>
 
                     <div className="text-review">
-                        <textarea className="form-control" rows="4"></textarea>
-                        <button className='chooseroom'>รีวิว</button>
-                    </div>
+                <textarea
+                    className="form-control"
+                    rows="4"
+                    value={reviewText}
+                    onChange={(e) => setReviewText(e.target.value)}
+                    placeholder="แสดงความคิดเห็นของคุณที่นี่..."
+                ></textarea>
+                <button className='chooseroom' onClick={submitReview}>รีวิว</button>
+            </div>
                 </div>
             )}
 

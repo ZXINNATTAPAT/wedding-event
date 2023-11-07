@@ -49,7 +49,7 @@ function BookingList() {
     { field: "BookingID", headerName: "Booking ID", width: 150 },
     { field: "BrideName", headerName: "Bride Name", width: 200 },
     { field: "GroomName", headerName: "Groom Name", width: 200 },
-    { field: "VenueID", headerName: "Venue Name", width: 130 },
+    { field: "VenueName", headerName: "Venue Name", width: 130 },
     { field: "BookingDateandTime", headerName: "Booking Date/Time", width: 200 },
     { field: "EventDate", headerName: "Event Date", type: "date", width: 150 },
     { field: "EventStartTime", headerName: "Event Start Time", width: 150 },
@@ -89,10 +89,27 @@ function BookingList() {
     },
   ];
 
-  const handleDelete = (bookingId) => {
-    const updatedRows = rows.filter((row) => row.BookingID !== bookingId);
-    setRows(updatedRows);
-  };
+  // const handleDelete = (bookingId) => {
+  //   const updatedRows = rows.filter((row) => row.BookingID !== bookingId);
+  //   setRows(updatedRows);
+  // };
+
+  // const handleDelete = (bookingId) => {
+  //   axios.delete(`http://localhost:5000/Bookingdata/${bookingId}`)
+  //     .then((response) => {
+  //       if (response.status === 200) {
+  //         // หากลบข้อมูลสำเร็จที่ฝังในฐานข้อมูล
+  //         const updatedRows = rows.filter((row) => row.BookingID !== bookingId);
+  //         setRows(updatedRows);
+  //       } else {
+  //         // กรณีเกิดข้อผิดพลาดหรือคำขอลบไม่สำเร็จ
+  //         console.error("Failed to delete data");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error deleting data: ", error);
+  //     });
+  // };
 
   const handleStatusChange = (e, bookingId) => {
     const newValue = e.target.value;

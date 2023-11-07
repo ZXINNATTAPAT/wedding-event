@@ -25,7 +25,7 @@ editUser.post("/editUser/:customerID", jsonParser, (req, res) => {
 // })
 
 editUser.post("/getUser", (req, res) => {
-    db.query("SELECT * FROM `customer` WHERE CustomerID = ?",[req.body.CustomerID], (err, result) => {
+    db.query("SELECT * FROM customer", (err, result) => {
         if (err) {
             console.log(err);
         } else {

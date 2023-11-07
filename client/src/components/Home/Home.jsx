@@ -26,7 +26,7 @@ const Home = () => {
     };
 
     // ส่งข้อมูลไปยัง Express.js โดยใช้ fetch
-    axios.get('http://localhost:5000/Filter', { params: requestData })
+    axios.post('http://localhost:5000/Filter/:VenuePrice/:MaxCapacity', { params: requestData })
       .then((response) => {
         // ทำอะไรกับผลลัพธ์ที่คุณได้รับจาก Express.js
         console.log('ผลลัพธ์ที่ค้นพบ:', response.data);
