@@ -12,6 +12,8 @@ const Payment = require("./Payment.js");
 const AdminHome = require("./AdminHome.js");
 const Review = require("./Review.js");
 const ShowReview = require("./ShowReview.js");
+const Filter = require("./Filter.js");
+const UserProfile = require('./UserProfile');
 const Booking = require("./Booking.js");
 
 
@@ -56,6 +58,9 @@ app.use("/", Payment);
 app.use("/", AdminHome);
 app.use("/", Review);
 app.use("/", ShowReview);
+app.use("/", Filter);
+app.use("/", UserProfile);
+
 
 // app.get('/', editUser ,(req, res) => {
 //     res.send(EditProflie.EditProflie());

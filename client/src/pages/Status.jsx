@@ -51,7 +51,7 @@ function Status() {
                 )}
                 {status === "เสร็จสิ้น" && (
                   <div className="d-flex justify-content-center m-3">
-                    <Link to="/roomdetail/1">
+                    <Link to={`/roomdetail/1?status=${status}`}>
                       <Button
                         className="d-flex justify-content-center align-items-center"
                         variant="primary"

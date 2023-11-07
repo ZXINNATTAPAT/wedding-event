@@ -15,12 +15,35 @@ AdminHome.get("/Bookingdata", (req, res) => {
     });
 });
 
+// AdminHome.post("/Bookingdata/:BookingID", (req, res) => {
+//     const BookingID = req.params.BookingID;
+//     db.query("DELETE FROM booking WHERE BookingID = ?;",[req.body.BookingID], (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             console.log(result); // แสดงผลลัพธ์ใน console
+//             res.send(result);
+//         }
+//     });
+// });
+
 AdminHome.get("/Venuedata", (req, res) => {
     db.query("SELECT * FROM venue", (err, result) => {
         if (err) {
             console.log(err);
         } else {
             //console.log(result); // แสดงผลลัพธ์ใน console
+            res.send(result);
+        }
+    });
+});
+
+AdminHome.get("/Userdata", (req, res) => {
+    db.query("SELECT * FROM customer", (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -48,8 +71,8 @@ AdminHome.get("/photographerdata", (req, res) => {
     });
 });
 
-AdminHome.get("/Userdata", (req, res) => {
-    db.query("SELECT * FROM customer", (err, result) => {
+AdminHome.get("/Review", (req, res) => {
+    db.query("SELECT * FROM review", (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -58,6 +81,40 @@ AdminHome.get("/Userdata", (req, res) => {
         }
     });
 });
+
+AdminHome.delete("/DeleteReview/:ReviewNo", (req, res) => {
+    db.query("DELETE FROM review WHERE ReviewNo = ?;",[req.params.ReviewNo], (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result); // แสดงผลลัพธ์ใน console
+            res.send(result);
+        }
+    });
+});
+
+// AdminHome.get("/AdminUser", (req, res) => {
+//     db.query("SELECT * FROM admin", (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             console.log(result); // แสดงผลลัพธ์ใน console
+//             res.send(result);
+//         }
+//     });
+// });
+
+// AdminHome.post("/DeleteAdmin/:AdminID", (req, res) => {
+//     const AdminID = req.params.AdminID;
+//     db.query("DELETE FROM admin WHERE AdminID = ?;",[req.body.AdminID], (err, result) => {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             console.log(result); // แสดงผลลัพธ์ใน console
+//             res.send(result);
+//         }
+//     });
+// });
 
 // AdminHome.get("/Search/:BookingID", async (req, res) => {
 //     db.query("SELECT BookingID, BrideName, GroomName, BookingDateandTime, EventDate, EventStartTime, EventEndTime, NumofGuest FROM booking WHERE BookingID = ?",[req.body.BookingID], (err, result) => {

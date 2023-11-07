@@ -7,12 +7,12 @@ import Button from "@mui/material/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function User() {
+function AdminUser() {
   const [rows, setRows] = useState([]);
   // const [selectedRowIds, setSelectedRowIds] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/Userdata")
+    axios.get("http://localhost:5000/AdminUser")
       .then((response) => {
         const rowsWithId = response.data.map((row, index) => ({
           ...row,
@@ -27,29 +27,29 @@ function User() {
       });
   }, []);
 
-  // const handleDelete = (CustomerId) => {
-  //   axios.delete(`http://localhost:5000/DeleteUser/${CustomerId}`)
-  //     .then((response) => {
-  //       if (response.status === 200) {
-  //         // หากลบข้อมูลสำเร็จที่ฝังในฐานข้อมูล
-  //         const updatedRows = rows.filter((row) => row.CustomerID !== CustomerID);
-  //         setRows(updatedRows);
-  //       } else {
-  //         // กรณีเกิดข้อผิดพลาดหรือคำขอลบไม่สำเร็จ
-  //         console.error("Failed to delete data");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error deleting data: ", error);
-  //     });
-  // };
+  const handleDelete = (AdminID) => {
+    axios.delete(`http://localhost:5000/DeleteAdmin/${AdminID}`)
+      .then((response) => {
+        if (response.status === 200) {
+          // หากลบข้อมูลสำเร็จที่ฝังในฐานข้อมูล
+          const updatedRows = rows.filter((row) => row.AdminID !== AdminID);
+          setRows(updatedRows);
+        } else {
+          // กรณีเกิดข้อผิดพลาดหรือคำขอลบไม่สำเร็จ
+          console.error("Failed to delete data");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting data: ", error);
+      });
+  };
 
 const columns = [
-    { field: "CustomerID", headerName: "ID", width: 10 },
-    { field: "Username", headerName: "Username", width: 130 },
-    { field: "Password", headerName: "Password",width: 130 },
-    { field: "Email", headerName: "Email", type:"email" ,width: 250 },
-    { field: "PhoneNo", headerName: "PhoneNo",width: 130 },
+    { field: "AdminID", headerName: "ID", width: 10 },
+    { field: "AdminName", headerName: "Username", width: 130 },
+    { field: "AdminPassword", headerName: "Password",width: 130 },
+    { field: "AdminEmail", headerName: "Email", type:"email" ,width: 250 },
+    { field: "AdminPhoneNo", headerName: "PhoneNo",width: 130 },
     {
       field: "actions",
       headerName: "Actions",
@@ -59,7 +59,7 @@ const columns = [
           variant="contained"
           color="error"
           startIcon={<DeleteIcon />}
-          onClick={() => handleDelete(params.row.CustomerID)}
+          onClick={() => handleDelete(params.row.AdminID)}
         >
           Delete
         </Button>
@@ -92,4 +92,4 @@ const columns = [
   )
 }
 
-export default User;
+export default AdminUser;

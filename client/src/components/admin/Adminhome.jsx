@@ -194,10 +194,10 @@ const Adminhome = () => {
             ))}
           </List>
           <List>
-            {["User"].map((text, index) => (
+            {["User", "Review"].map((text, index) => (
               <ListItem key={text} disablePadding sx={{ display: "block" }}>
                 <Link
-                  to={text === "User" ? "/user-list" : "/photographer"}
+                  to={text === "User" ? "/user-list" : "/review"}
                   style={{ textDecoration: "none", color: "inherit" }}
                 >
                   <ListItemButton
@@ -214,7 +214,7 @@ const Adminhome = () => {
                         justifyContent: 'center',
                       }}
                     >
-                      {index % 2 === 0 ? <PersonIcon /> : <PhotoCameraIcon />}
+                      {index % 2 === 0 ? <PersonIcon /> : <BookIcon />}
                     </ListItemIcon>
                     <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
                   </ListItemButton>
