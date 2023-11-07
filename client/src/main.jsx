@@ -21,6 +21,7 @@ import User from "./components/admin/User.jsx";
 import Home from "./components/Home/Home-user/Home.jsx";
 import Profile from "./components/Profile/Profile.jsx";
 import StarRating from "./components/StarRating/StarRating.jsx";
+import Review from "./components/StarRating/Review.jsx";
 
 const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
   {
     path: "/starrating",
     element: <StarRating />,
+  },
+  {
+    path: "/review",
+    element: <Review />,
   }
 
 ]);

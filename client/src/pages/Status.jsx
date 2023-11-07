@@ -45,7 +45,7 @@ function Status() {
       width: 150,
       renderCell: (params) => (
         params.row.Status === "เสร็จสิ้น" ? (
-          <Button variant="contained" color="primary" component={Link} to={`/roomdetail/${params.row.id}`}>รีวิว</Button>
+          <Button variant="contained" color="primary" component={Link} to={`/review`}>รีวิว</Button>
         ) : (
           <Button variant="contained" color="error" onClick={() => handleCancelButton(params.row.id)}>ยกเลิก</Button>
         )
