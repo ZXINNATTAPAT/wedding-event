@@ -60,6 +60,7 @@ const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 function PaymentMethod() {
   const [selectedMethod, setSelectedMethod] = useState("");
   const [paymentOptions, setPaymentOptions] = useState([]);
+  const [roomdetail, setRoomdetail] = useState([])
 
   useEffect(() => {
     // Fetch payment method options from the backend
@@ -74,6 +75,7 @@ function PaymentMethod() {
 
   const handlePaymentMethod = (e) => {
     setSelectedMethod(e.target.value);
+
   };
 
   // console.log(selectedMethod);

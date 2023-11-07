@@ -18,10 +18,10 @@ const Login = () => {
 
     const customerRegister = () => {
         axios.post("http://localhost:5000/customerregister", {
-            username: username,
-            email: email,
-            password: password,
-            phoneno: phoneno,
+            Username: username,
+            Email: email,
+            Password: password,
+            PhoneNo: phoneno,
         }).then((response) => {
             if (response.data.status == 'ok') {
                 alert('register successful');
@@ -33,20 +33,20 @@ const Login = () => {
 
     const customerLogin = () => {
         axios.post("http://localhost:5000/customerlogin", {
-            email: email,
-            password: password,
+            Email: email,
+            Password: password,
         }).then((response) => {
             if (response.data.status == 'ok') {
                 window.location = '/Home';
                 alert('Login successful');
+                const CustomerID = response.data.CustomerID;
+                localStorage.setItem('CustomerID', CustomerID);
                 localStorage.setItem('Email', email);
                 // setLoginStatus(response.data.message);
             } else {
                 alert('Login failed')
             }
         })
-
-
     }
 
     // const test = () => {

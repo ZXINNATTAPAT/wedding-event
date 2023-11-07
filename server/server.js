@@ -16,6 +16,7 @@ const Filter = require("./Filter.js");
 const UserProfile = require('./UserProfile');
 const Booking = require("./Booking.js");
 const bookingList = require("./BookingList.js")
+const EditBooking = require("./EditBooking");
 
 // const { default: EditProflie } = require('../client/src/components/EditProflie/EditProflie');
 
@@ -61,6 +62,7 @@ app.use("/", ShowReview);
 app.use("/", bookingList)
 app.use("/", Filter);
 app.use("/", UserProfile);
+app.use("/", EditBooking)
 
 app.get("/customer/:id", (req, res) => {
     const { id } = req.params;
