@@ -49,7 +49,7 @@ function subtotal(items) {
 
 const rows = [
   createRow("ห้อง", 1, 29000),
-  createRow("จำนวนคน", 100, 200),
+  createRow("ประเภทดนตรี", "Blue", 2000),
   createRow("จำนวนช่างถ่ายรูป", 4, 3000),
 ];
 
@@ -60,6 +60,7 @@ const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 function PaymentMethod() {
   const [selectedMethod, setSelectedMethod] = useState("");
   const [paymentOptions, setPaymentOptions] = useState([]);
+  const [roomdetail, setRoomdetail] = useState([]);
 
   useEffect(() => {
     // Fetch payment method options from the backend
@@ -74,6 +75,7 @@ function PaymentMethod() {
 
   const handlePaymentMethod = (e) => {
     setSelectedMethod(e.target.value);
+
   };
 
   // console.log(selectedMethod);
@@ -157,7 +159,7 @@ function PaymentMethod() {
                     <TableCell>รายการ</TableCell>
                     <TableCell align="right">จำนวน</TableCell>
                     <TableCell align="right">ราคา</TableCell>
-                    <TableCell align="right">รวม</TableCell>
+                    {/* <TableCell align="right">รวม</TableCell> */}
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -166,13 +168,13 @@ function PaymentMethod() {
                       <TableCell>{row.desc}</TableCell>
                       <TableCell align="right">{row.qty}</TableCell>
                       <TableCell align="right">{row.unit}</TableCell>
-                      <TableCell align="right">
+                      {/* <TableCell align="right">
                         {ccyFormat(row.price)}
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   ))}
                   <TableRow>
-                    <TableCell rowSpan={3} />
+                    {/* <TableCell rowSpan={3} /> */}
                     <TableCell colSpan={2}>ยอดรวม</TableCell>
                     <TableCell align="right">
                       {ccyFormat(invoiceTotal)}

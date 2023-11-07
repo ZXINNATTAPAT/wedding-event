@@ -16,6 +16,19 @@ function BookingList() {
   const [filteredRows, setFilteredRows] = useState([]); // เพิ่ม filteredRows
 
   useEffect(() => {
+    filterData();
+  }, [searchTerm]);
+
+  const filterData = () => {
+    if (searchTerm === "") {
+      setFilteredRows(rows);
+    } else {
+      const filteredData = rows.filter((row) => row.BookingID.toString().includes(searchTerm));
+      setFilteredRows(filteredData);
+    }
+  };
+
+  useEffect(() => {
     axios.get("http://localhost:5000/Bookingdata")
       .then((response) => {
         const rowsWithId = response.data.map((row, index) => ({
@@ -32,18 +45,6 @@ function BookingList() {
   }, []);
 
   // const [selectedRowIds, setSelectedRowIds] = useState([]);
-  useEffect(() => {
-    filterData();
-  }, [searchTerm]);
-
-  const filterData = () => {
-    if (searchTerm === "") {
-      setFilteredRows(rows);
-    } else {
-      const filteredData = rows.filter((row) => row.BookingID.toString().includes(searchTerm));
-      setFilteredRows(filteredData);
-    }
-  };
 
   const columns = [
     { field: "BookingID", headerName: "Booking ID", width: 150 },

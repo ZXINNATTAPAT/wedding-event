@@ -32,22 +32,11 @@ login.use(session(
 ))
 
 
-
-login.get("/customer", (req, res) => {
-    db.query("SELECT * FROM customer", (err, result) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send(result);
-        }
-    });
-});
-
 login.post("/customerregister", jsonParser, (req, res, next) => {
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
-    const phoneNo = req.body.phoneno;
+    const username = req.body.Username;
+    const email = req.body.Email;
+    const password = req.body.Password;
+    const phoneNo = req.body.PhoneNo;
 
     bcrypt.hash(password, saltRounds, function (err, hash) {
         db.execute(
@@ -73,8 +62,8 @@ login.post("/customerregister", jsonParser, (req, res, next) => {
 // });
 
 login.post("/customerlogin", jsonParser, function (req, res, next) {
-    const email = req.body.email;
-    const password = req.body.password;
+    const email = req.body.Email;
+    const password = req.body.Password;
 
     db.execute(
         "SELECT * FROM customer WHERE Email = ?",
@@ -94,7 +83,7 @@ login.post("/customerlogin", jsonParser, function (req, res, next) {
                     console.log(req.session.userID);
                     // res.redirect("/Home")
                     // res.send(customer);
-                    res.json({ status: "ok", message: "login success" });
+                    res.json({ status: "ok"});
                 } else {
                     res.json({ status: "error", message: "login failed" });
                 }

@@ -6,10 +6,14 @@ import { Link } from 'react-router-dom';
 
 const Profile = () => {
     const getEmail = localStorage.getItem("Email");
+
     const [Username, setUsername] = useState('');
     const [PhoneNO, setPhoneNO] = useState('');
     const [Email, setEmail] = useState(getEmail);
     // const [CustomerID, setCustomerID] = useState(''); // Assuming 1 is the default ID
+    const setName = localStorage.setItem("Username",Username);
+    const getName = localStorage.getItem("setName");
+    console.log("ค่าที่ได้",getName);
 
     useEffect(() => {
         axios.get(`http://localhost:5000/UserProfile/${Email}`)

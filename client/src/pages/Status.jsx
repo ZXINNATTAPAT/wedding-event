@@ -49,7 +49,6 @@ function Status() {
       .catch((error) => {
         console.error("Error fetching data: ", error);
       });
-
   }, []);
 
 

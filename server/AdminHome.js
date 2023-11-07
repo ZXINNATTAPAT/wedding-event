@@ -3,13 +3,15 @@ const db = require("./database.js");
 const bodyParser = require('body-parser');
 const AdminHome = express();
 const jsonParser = bodyParser.json();
+const cors = require("cors");
+
 
 AdminHome.get("/Bookingdata", (req, res) => {
     db.query("SELECT booking.BookingID, booking.BrideName, booking.GroomName,venue.VenueName ,booking.BookingDateandTime, booking.EventDate, booking.EventStartTime, booking.EventEndTime, booking.NumofGuest, photographer.NumberofPH, music.Genre, status.Title FROM booking INNER JOIN venue ON booking.VenueID= venue.VenueID INNER JOIN photographer ON booking.PhotographerID = photographer.PhotographerID INNER JOIN music ON booking.MusicID = music.MusicID INNER JOIN status ON booking.StatusID = status.StatusID", (err, result) => {
         if (err) {
             console.log(err);
         } else {
-            //console.log(result); // แสดงผลลัพธ์ใน console
+            console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -32,7 +34,7 @@ AdminHome.get("/Venuedata", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            //console.log(result); // แสดงผลลัพธ์ใน console
+            console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -43,7 +45,7 @@ AdminHome.get("/Userdata", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            // console.log(result); // แสดงผลลัพธ์ใน console
+            console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -54,7 +56,7 @@ AdminHome.get("/Musicdata", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            //console.log(result); // แสดงผลลัพธ์ใน console
+            console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -65,7 +67,7 @@ AdminHome.get("/photographerdata", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            // console.log(result); // แสดงผลลัพธ์ใน console
+            console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -76,7 +78,7 @@ AdminHome.get("/Review", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            // console.log(result); // แสดงผลลัพธ์ใน console
+            console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -87,10 +89,15 @@ AdminHome.delete("/DeleteReview/:ReviewNo", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            // console.log(result); // แสดงผลลัพธ์ใน console
+            console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
+});
+
+AdminHome.use((req, res, next) => {
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    next();
 });
 
 // AdminHome.get("/AdminUser", (req, res) => {

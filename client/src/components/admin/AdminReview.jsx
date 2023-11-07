@@ -6,7 +6,7 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function Review() {
+function AdminReview() {
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -35,8 +35,10 @@ function Review() {
       }
     })
     .then(response => {
+      console.log(response); // Log the response to check the status and data
+  
       if (response.ok) {
-        fetchReviewData(); // ลบข้อมูลแล้วดึงข้อมูลใหม่
+        fetchReviewData(); // To refresh the data after successful deletion
       } else {
         console.error("Failed to delete data");
       }
@@ -48,7 +50,6 @@ function Review() {
 
   const columns = [
     { field: "ReviewNo", headerName: "No", width: 100 },
-    { field: "ReviewDateandTime", headerName: "Review Date/Time", width: 200 },
     { field: "Score", headerName: "Score", width: 130 },
     { field: "Description", headerName: "Description", width: 300 },
     {
@@ -84,4 +85,4 @@ function Review() {
   );
 }
 
-export default Review;
+export default AdminReview;

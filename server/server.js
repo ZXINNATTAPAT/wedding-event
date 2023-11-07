@@ -16,13 +16,14 @@ const Filter = require("./Filter.js");
 const UserProfile = require('./UserProfile');
 const Booking = require("./Booking.js");
 const bookingList = require("./BookingList.js")
+const EditBooking = require("./EditBooking");
 
 // const { default: EditProflie } = require('../client/src/components/EditProflie/EditProflie');
 
 const app = express();
 app.use(cors({
     origin: ["http://localhost:5173"],
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST","DELETE"],
     credentials: true
 }));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -61,6 +62,7 @@ app.use("/", ShowReview);
 app.use("/", bookingList)
 app.use("/", Filter);
 app.use("/", UserProfile);
+app.use("/", EditBooking)
 
 app.get("/customer/:id", (req, res) => {
     const { id } = req.params;

@@ -27,7 +27,7 @@ const jsonParser = bodyParser.json();
 //     });
 // });
 
-Review.get("/Review/:Email", (req, res) => {
+Review.post("/Review", (req, res) => {
     const Email = req.params.Email;
     console.log("ค่าที่ส่งมา:", Email);
     db.query("INSERT INTO review (Score, Description,BookingID) VALUES (?, ?, ?);",[req.body.Score, req.body.Description,req.body.BookingID], (err, result) => {

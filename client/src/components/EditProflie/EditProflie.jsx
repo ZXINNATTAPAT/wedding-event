@@ -35,14 +35,14 @@ const EditProflie = () => {
       <h1>Edit Profile</h1>
       <hr />
       <div className="row">
-        <div className="col-md-3">
+        {/* <div className="col-md-3">
           <div className="text-center">
             <img src="//placehold.it/150" className="avatar img-circle" />
             <br />
             <br />
             <input type="file" className="form-control" />
           </div>
-        </div>
+        </div> */}
         <div className="col-md-9 personal-info">
           <h3>Personal info</h3>
           <form className="form-horizontal" role="form" onSubmit={handleSubmit}>

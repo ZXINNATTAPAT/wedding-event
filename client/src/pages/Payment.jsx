@@ -3,25 +3,42 @@ import { Link } from "react-router-dom";
 import qrcode from "../assets/qrcode.jpg";
 import NavbarUser from "../components/Navbar-user/NavbarUser";
 import Button from "react-bootstrap/Button";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function Payment() {
   // ใช้ useParams เพื่อรับค่าวิธีการชำระเงินจาก URL
 
   const { paymentMethod } = useParams();
+  const [paymentData, setPaymentData] = useState(null);
 
-  
+  useEffect(() => {
+    // Make an HTTP request to fetch payment methods from the backend
+    // Replace 'backendEndpoint' with the actual URL of your backend API
+    axios
+      .get("http://localhost:5000/PaymentMethod")
+      .then((response) => {
+        setPaymentData(response.data);
+      })
+      .catch((error) => console.error("Error fetching payment data: ", error));
+  }, [paymentMethod]);
+
+  const selectedPayment = paymentData.find(
+    (method) => method.MethodNo === parseInt(paymentMethod)
+  );
+
 
   // กำหนดข้อมูลวิธีการชำระเงิน
-  const paymentData = {
-    qrCode: {
-      title: "ชำระด้วยสแกนคิวอาร์โค้ด",
-      description: "สแกนคิวอาร์โค้ดด้านล่างเพื่อทำการชำระเงิน.",
-    },
-    bankTransfer: {
-      title: "โอนผ่านบัญชีธนาคาร",
-      description: "โอนเงินผ่านบัญชีธนาคารด้านล่างเพื่อทำการชำระเงิน.",
-    },
-  };
+  // const paymentData = {
+  //   qrCode: {
+  //     title: "ชำระด้วยสแกนคิวอาร์โค้ด",
+  //     description: "สแกนคิวอาร์โค้ดด้านล่างเพื่อทำการชำระเงิน.",
+  //   },
+  //   bankTransfer: {
+  //     title: "โอนผ่านบัญชีธนาคาร",
+  //     description: "โอนเงินผ่านบัญชีธนาคารด้านล่างเพื่อทำการชำระเงิน.",
+  //   },
+  // };
 
   
  
@@ -34,8 +51,8 @@ function Payment() {
       <br />
       <br />
       <div style={{ textAlign: "center" }}>
-        <h1>{paymentData[paymentMethod].title}</h1>
-        <p>{paymentData[paymentMethod].description}</p>
+      <h1>{selectedPayment.MethodNo}</h1>
+        <p>{selectedPayment.Method}</p>
 
         {/* แสดงฟอร์มสำหรับกรอกข้อมูลบัตรเครดิต */}
         {/* {paymentMethod === "creditCard" && (
@@ -111,7 +128,7 @@ function Payment() {
           </div>
         )} */}
         {/* แสดงฟอร์มสำหรับสแกน */}
-        {paymentMethod === "qrCode" && (
+        {selectedPayment.MethodNo === 1  && (
           <>
             <div className="d-flex justify-content-center m-2 p-2 width-20">
 
@@ -120,7 +137,7 @@ function Payment() {
           </>
         )}
         {/* แสดงฟอร์มสำหรับโอนผ่านบัญชี */}
-        {paymentMethod === "bankTransfer" && (
+        {selectedPayment.MethodNo === 2 && (
           <>
             <div className="d-flex-block justify-content-center m-2 p-2">
               <strong>ธนาคารไทยพาณิชย์&nbsp; </strong>

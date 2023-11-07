@@ -63,7 +63,7 @@ const NavbarUser = () => {
         <div className={active}>
           <ul className="navLists flex">
             <li className="navItem">
-              <Link to="/">
+              <Link to="/Home">
                 <a className="navLink">หน้าหลัก</a>
               </Link>
             </li>
