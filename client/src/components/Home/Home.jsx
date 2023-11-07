@@ -10,9 +10,9 @@ const Home = () => {
   const [price, setPrice] = useState('');
   const [capacity, setCapacity] = useState('');
   const [loginStatus, setLoginStatus] = useState("");
-
   
-  // axios.defaults.withCredentials = true;
+  axios.defaults.withCredentials = true;
+  
 
 //   useEffect(() => {
 //     axios.get("http://localhost:5000/customerlogin").then((response) => {
@@ -61,7 +61,6 @@ const Home = () => {
             </h1>
             <p className="subTitle">
               รวมสถานที่จัดงานแต่งงานและงานอีเว้นท์ครบวงจร
-              
             </p>
             <h1>{loginStatus}</h1>
           </div>

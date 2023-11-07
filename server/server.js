@@ -15,7 +15,7 @@ const ShowReview = require("./ShowReview.js");
 const Filter = require("./Filter.js");
 const UserProfile = require('./UserProfile');
 const Booking = require("./Booking.js");
-
+const bookingList = require("./BookingList.js")
 
 // const { default: EditProflie } = require('../client/src/components/EditProflie/EditProflie');
 
@@ -58,10 +58,25 @@ app.use("/", Payment);
 app.use("/", AdminHome);
 app.use("/", Review);
 app.use("/", ShowReview);
+app.use("/", bookingList)
 app.use("/", Filter);
 app.use("/", UserProfile);
 
-
+app.get("/customer/:id", (req, res) => {
+    const { id } = req.params;
+    db.query("SELECT * FROM customer WHERE CustomerID = ?", [id], (err, results) => {
+      if (err) {
+        console.error("Error fetching user: ", err);
+        res.status(500).json({ error: "Internal server error." });
+        return;
+      }
+      if (results.length === 0) {
+        res.status(404).json({ error: "User not found." });
+        return;
+      }
+      res.status(200).json(results[0]);
+    });
+  });
 // app.get('/', editUser ,(req, res) => {
 //     res.send(EditProflie.EditProflie());
 // })

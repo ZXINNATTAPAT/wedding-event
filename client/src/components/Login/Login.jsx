@@ -32,7 +32,6 @@ const Login = () => {
     }
 
     const customerLogin = () => {
-
         axios.post("http://localhost:5000/customerlogin", {
             email: email,
             password: password,
@@ -40,6 +39,7 @@ const Login = () => {
             if (response.data.status == 'ok') {
                 window.location = '/Home';
                 alert('Login successful');
+                localStorage.setItem('Email', email);
                 // setLoginStatus(response.data.message);
             } else {
                 alert('Login failed')
@@ -49,10 +49,26 @@ const Login = () => {
 
     }
 
+    // const test = () => {
+    //     const sessionCookie = document.cookie;
+    //     const apiEndpoint = 'http://localhost:5000/test'
+    //     const requestData = { key: 'email' }
+    //     const config = {
+    //         headers: {
+    //             'Cookie': sessionCookie,
+    //         }
+    //     }
+    //     axios.post(apiEndpoint, requestData, config)
+    //         .then(response => {
+    //             console.log(response.data);
+    //         })
+    // }
+
+
     // useEffect(() => {
     //     axios.get("http://localhost:5000/customerlogin").then((response) => {
     //         if (response.data.loggedIn == true) {
-                
+
     //             setLoginStatus(response.data.customer[0].Email);
     //         }
     //     });

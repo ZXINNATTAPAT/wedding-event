@@ -30,7 +30,7 @@ Venue.use(cors());
     if (err) {
       console.log(err);
   } else {
-      console.log(result); // แสดงผลลัพธ์ใน console
+      // console.log(result); // แสดงผลลัพธ์ใน console
       res.send(result);
   }
 });

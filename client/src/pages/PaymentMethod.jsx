@@ -18,8 +18,9 @@ import InputLabel from '@mui/material/InputLabel';
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MenuItem } from "@mui/material";
+import axios from "axios";
 
 const Img = styled("img")({
   margin: "auto",
@@ -58,11 +59,24 @@ const invoiceTotal = invoiceTaxes + invoiceSubtotal;
 
 function PaymentMethod() {
   const [selectedMethod, setSelectedMethod] = useState("");
+  const [paymentOptions, setPaymentOptions] = useState([]);
+
+  useEffect(() => {
+    // Fetch payment method options from the backend
+    axios.get('http://localhost:5000/PaymentMethod')
+      .then((response) => {
+        setPaymentOptions(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching payment methods:', error);
+      });
+  }, []);
 
   const handlePaymentMethod = (e) => {
     setSelectedMethod(e.target.value);
   };
-  console.log(selectedMethod);
+
+  // console.log(selectedMethod);
   return (
     <>
       <NavbarUser />
@@ -165,33 +179,66 @@ function PaymentMethod() {
                     </TableCell>
                   </TableRow>
                 </TableBody>
-                <FormControl
-                  sx={{ textAlign: "center", width: "90%", margin: 2 }}
-                >
+                <FormControl sx={{ textAlign: "center", width: "90%", margin: 2 }}>
                   <InputLabel id="demo-simple-select-helper-label">เลือกวิธีการชำระเงิน</InputLabel>
-
-                    <Select
-                      style={{ textAlign: "center" }}
-                      name=""
-                      id="demo-simple-select-helper"
-                      onChange={handlePaymentMethod}
-
-                    >
-                      <MenuItem value="">
-                        <em>เลือกวิธีการชำระเงิน</em>
+                  <Select
+                    style={{ textAlign: "center" }}
+                    name=""
+                    id="demo-simple-select-helper"
+                    onChange={handlePaymentMethod}
+                  >
+                    <MenuItem value="">
+                      <em>เลือกวิธีการชำระเงิน</em>
+                    </MenuItem>
+                    {paymentOptions.map((option) => (
+                      <MenuItem key={option.MethodNo} value={option.Method}>
+                        {option.Method}
                       </MenuItem>
-                      {/* <MenuItem value="creditCard">บัตรเครดิต</MenuItem> */}
-                      <MenuItem value="qrCode">สแกนคิวอาร์โค้ด</MenuItem>
-                      <MenuItem value="bankTransfer">
-                        โอนผ่านบัญชีธนาคาร
-                      </MenuItem>
-                    </Select>
+                    ))}
+                  </Select>
                   <Grid sx={{ mt: 2 }}>
                     <Link to={`/payment/${selectedMethod}`}>
                       <Button variant="primary">ชำระเงิน</Button>
                     </Link>
                   </Grid>
                 </FormControl>
+
+                {/* <FormControl
+                  sx={{ textAlign: "center", width: "90%", margin: 2 }}
+                >
+                  <InputLabel id="demo-simple-select-helper-label">เลือกวิธีการชำระเงิน</InputLabel>
+
+                  <Select
+                    style={{ textAlign: "center" }}
+                    name=""
+                    id="demo-simple-select-helper"
+                    onChange={handlePaymentMethod}
+
+                  >
+                    <MenuItem value="">
+                      <em>เลือกวิธีการชำระเงิน</em>
+                      </MenuItem>
+                      </MenuItem>
+                      <MenuItem value="creditCard">บัตรเครดิต</MenuItem>
+                      <MenuItem value="qrCode">สแกนคิวอาร์โค้ด</MenuItem>
+                      <MenuItem value="bankTransfer">
+                        โอนผ่านบัญชีธนาคาร
+                      </MenuItem>
+                          <MenuItem value="">
+                          <em>เลือกวิธีการชำระเงิน</em>
+                        </MenuItem>
+                        {paymentOptions.map((option) => (
+                          <MenuItem key={option.PaymentMethodID} value={option.PaymentMethod}>
+                            {option.PaymentMethod}
+                          </MenuItem>
+                        )}
+                    </Select>
+                  <Grid sx={{ mt: 2 }}>
+                    <Link to={`/payment/${selectedMethod}`}>
+                      <Button variant="primary">ชำระเงิน</Button>
+                    </Link>
+                  </Grid>
+                </FormControl> */}
               </Paper>
             </Table>
           </TableContainer>

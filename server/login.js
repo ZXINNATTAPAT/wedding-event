@@ -209,4 +209,37 @@ login.get("/customerlogout", (req, res) => {
 //     );
 // });
 
+login.post("/test", jsonParser, function (req, res, next) {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    req.session.userID = email;
+    console.log(req.session.userID);
+    // db.execute(
+    //     "SELECT * FROM customer WHERE Email = ?",
+    //     [email],
+    //     function (err, customer, fields) {
+    //         if (err) {
+    //             res.json({ status: "error", message: "failed" });
+    //             return;
+    //         }
+    //         if (customer.length == 0) {
+    //             res.json({ status: "error", message: "no user found" });
+    //             return;
+    //         }
+    //         bcrypt.compare(password, customer[0].Password, function (err, isLogin) {
+    //             if (isLogin) {
+    //                 req.session.userID = customer;
+    //                 console.log(req.session.userID);
+    //                 // res.redirect("/Home")
+    //                 // res.send(customer);
+    //                 res.json({ status: "ok", message: "login success" });
+    //             } else {
+    //                 res.json({ status: "error", message: "login failed" });
+    //             }
+    //         });
+    //     }
+    // );
+});
+
 module.exports = login;

@@ -4,8 +4,22 @@ const bodyParser = require('body-parser');
 const booking = express();
 const jsonParser = bodyParser.json();
 
-booking.get('/getmusic', (req, res) => {
-    db.query('SELECT * FROM music', (err, result) => {
+booking.post('/createbooking', jsonParser,(req, res) => {
+    const BrideName = req.body.BrideName;
+    const GroomName = req.body.GroomName;
+    const BookingDateandTime = req.body.BookingDateandTime;
+    const EventDate = req.body.EventDate;
+    const EventStartTime = req.body.EventStartTime;
+    const EventEndTime = req.body.EventEndTime;
+    const NumofGuest = req.body.NumofGuest;
+    const CustomerID = req.body.CustomerID;
+    const VenueID = req.body.VenueID;
+    const MusicID = req.body.MusicID;
+    const PhotographerID = req.body.PhotographerID;
+
+    db.query('INSERT INTO booking (BrideName, GroomName, BookingDateandTime, EventDate, EventStartTime, EventEndTime, NumofGuest, CustomerID, VenueID, MusicID, PhotographerID) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+    [BrideName, GroomName, BookingDateandTime, EventDate, EventStartTime, EventEndTime, NumofGuest, CustomerID, VenueID, MusicID, PhotographerID],
+    function (err, results, fields) {
         if (err) {
             console.log(err);
         }
@@ -15,19 +29,22 @@ booking.get('/getmusic', (req, res) => {
     })
 })
 
-booking.get('/getphotographer' ,(req, res) => {
-    db.query('SELECT * FROM photographer', (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    })
-})
+booking.post('/updatebooking',jsonParser, (req,res) => {
+    const BrideName = req.body.BrideName;
+    const GroomName = req.body.GroomName;
+    const BookingDateandTime = req.body.BookingDateandTime;
+    const EventDate = req.body.EventDate;
+    const EventStartTime = req.body.EventStartTime;
+    const EventEndTime = req.body.EventEndTime;
+    const NumofGuest = req.body.NumofGuest;
+    const CustomerID = req.body.CustomerID;
+    const VenueID = req.body.VenueID;
+    const MusicID = req.body.MusicID;
+    const PhotographerID = req.body.PhotographerID;
 
-booking.get('/getbooking', (req, res) => {
-    db.query('SELECT * FROM booking', (err, result) => {
+    db.query('UPDATE booking SET BrideName = ?, GroomName = ?, BookingDateandTime = ?, EventDate = ?, EventStartTime = ?, EventEndTime = ?, NumofGuest = ?, VenueID = ?, MusicID = ?, PhotographerID = ? WHERE CustomerID = ?',
+    [BrideName, GroomName, BookingDateandTime, EventDate, EventStartTime, EventEndTime, NumofGuest, CustomerID, VenueID, MusicID, PhotographerID],
+    function (err, results, fields) {
         if (err) {
             console.log(err);
         }

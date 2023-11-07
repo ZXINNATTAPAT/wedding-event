@@ -9,6 +9,8 @@ function Payment() {
 
   const { paymentMethod } = useParams();
 
+  
+
   // กำหนดข้อมูลวิธีการชำระเงิน
   const paymentData = {
     qrCode: {
