@@ -58,7 +58,7 @@ AdminHome.post("/updatestatus", (req, res) => {
 AdminHome.get("/Venuedata", (req, res) => {
     db.query("SELECT * FROM venue", (err, result) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
         } else {
             console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
@@ -69,7 +69,7 @@ AdminHome.get("/Venuedata", (req, res) => {
 AdminHome.get("/Userdata", (req, res) => {
     db.query("SELECT * FROM customer", (err, result) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
         } else {
             console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
@@ -80,7 +80,7 @@ AdminHome.get("/Userdata", (req, res) => {
 AdminHome.get("/Musicdata", (req, res) => {
     db.query("SELECT * FROM music", (err, result) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
         } else {
             console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
@@ -91,7 +91,7 @@ AdminHome.get("/Musicdata", (req, res) => {
 AdminHome.get("/photographerdata", (req, res) => {
     db.query("SELECT * FROM photographer", (err, result) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
         } else {
             console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);
@@ -102,7 +102,7 @@ AdminHome.get("/photographerdata", (req, res) => {
 AdminHome.get("/Review", (req, res) => {
     db.query("SELECT * FROM review", (err, result) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
         } else {
             console.log(result); // แสดงผลลัพธ์ใน console
             res.send(result);

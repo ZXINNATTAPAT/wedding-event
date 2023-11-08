@@ -55,7 +55,7 @@ function Payment() {
         <p>{selectedPayment.Method}</p>
 
         {/* แสดงฟอร์มสำหรับกรอกข้อมูลบัตรเครดิต */}
-        {paymentMethod === "creditCard" && (
+        {/* {paymentMethod === "creditCard" && (
           <div className=" d-flex justify-content-center" >
             <div className="card mb-4">
               <div className="card-body" >
@@ -126,7 +126,7 @@ function Payment() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
         {/* แสดงฟอร์มสำหรับสแกน */}
         {selectedPayment.MethodNo === 1  && (
           <>
