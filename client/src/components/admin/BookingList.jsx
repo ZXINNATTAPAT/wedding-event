@@ -86,19 +86,19 @@ function BookingList() {
       ),
     },
     {
-      field: "actions",
-      headerName: "Actions",
-      width: 150,
-      renderCell: (params) => (
-        <Button
-          variant="contained"
-          color="error"
-          startIcon={<DeleteIcon />}
-          onClick={() => handleDelete(params.row.BookingID)}
-        >
-          Delete
-        </Button>
-      ),
+      // field: "actions",
+      // headerName: "Actions",
+      // width: 150,
+      // renderCell: (params) => (
+      //   <Button
+      //     variant="contained"
+      //     color="error"
+      //     startIcon={<DeleteIcon />}
+      //     onClick={() => handleDelete(params.row.BookingID)}
+      //   >
+      //     Delete
+      //   </Button>
+      // ),
     },
   ];
 

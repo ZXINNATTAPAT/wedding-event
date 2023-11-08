@@ -60,7 +60,7 @@ AdminHome.get("/Venuedata", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(result); // แสดงผลลัพธ์ใน console
+             // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -71,7 +71,7 @@ AdminHome.get("/Userdata", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(result); // แสดงผลลัพธ์ใน console
+             // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -82,7 +82,7 @@ AdminHome.get("/Musicdata", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(result); // แสดงผลลัพธ์ใน console
+            // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -93,7 +93,7 @@ AdminHome.get("/photographerdata", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(result); // แสดงผลลัพธ์ใน console
+            // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -104,7 +104,7 @@ AdminHome.get("/Review", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(result); // แสดงผลลัพธ์ใน console
+           // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
@@ -115,7 +115,7 @@ AdminHome.delete("/DeleteReview/:ReviewNo", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(result); // แสดงผลลัพธ์ใน console
+           // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });

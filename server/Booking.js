@@ -76,9 +76,10 @@ Booking.post('/updatebooking', jsonParser, (req, res) => {
     const VenueID = req.body.VenueID;
     const MusicID = req.body.MusicID;
     const PhotographerID = req.body.PhotographerID;
+    const BookingID = req.body.BookingID
 
-    db.query('UPDATE booking SET BrideName = ?, GroomName = ?, BookingDateandTime = ?, EventDate = ?, EventStartTime = ?, EventEndTime = ?, NumofGuest = ?, VenueID = ?, MusicID = ?, PhotographerID = ? WHERE CustomerID = ?',
-        [BrideName, GroomName, BookingDateandTime, EventDate, EventStartTime, EventEndTime, NumofGuest, CustomerID, VenueID, MusicID, PhotographerID],
+    db.query('UPDATE booking SET BrideName = ?, GroomName = ?, BookingDateandTime = ?, EventDate = ?, EventStartTime = ?, EventEndTime = ?, NumofGuest = ?, VenueID = ?, MusicID = ?, PhotographerID = ? WHERE BookingID = ?',
+        [BrideName, GroomName, BookingDateandTime, EventDate, EventStartTime, EventEndTime, NumofGuest, CustomerID, VenueID, MusicID, PhotographerID, BookingID],
         function (err, results, fields) {
             if (err) {
                 console.log(err);

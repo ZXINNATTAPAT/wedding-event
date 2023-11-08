@@ -54,15 +54,15 @@ const router = createBrowserRouter([
   },
   {
     path: "editprofile",
-    element: <EditProflie />,
+    element: <Protected element = {<EditProflie />}/>,
   },
   {
     path: "profile",
-    element: <Profile />,
+    element: <Protected element = {<Profile />}/>,
   },
   {
     path: "booking",
-    element: <Booking />,
+    element: <Protected element = {<Booking />}/>,
   },
   {
     path: "/paymentMethod",

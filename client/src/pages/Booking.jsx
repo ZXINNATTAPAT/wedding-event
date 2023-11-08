@@ -152,10 +152,12 @@ function Booking() {
         const BookingID = response.data.BookingID;
         localStorage.setItem("BookingID", BookingID);
         console.log(BookingID);
+        window.location = "/paymentMethod"
     })
     .catch((error) => {
       console.error("Error sending booking data:", error);
       console.log(error.response); 
+      alert("โปรดกรอกข้อมูลอีกครั้ง");
     });
   
   }
@@ -377,9 +379,9 @@ function Booking() {
                     : null}
                 </Card.Text>
 
-                <Link to="/paymentMethod" >
-                  <Button variant="primary" onClick={book}>ยืนยันการจอง</Button>
-                  </Link>
+                {/* <Link to="/paymentMethod" > */}
+                <Button variant="primary" onClick={book}>ยืนยันการจอง</Button>
+                {/* </Link> */}
               </Card.Body>
             </Card>
           </div>

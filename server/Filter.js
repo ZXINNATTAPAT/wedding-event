@@ -20,8 +20,7 @@ Filter.post("/Filter/:VenuePrice/:MaxCapacity", jsonParser, (req, res) => {
         res.status(500).send("Failed to filter data");
       } else {
         const filteredResults = searchAndFilterData(VenuePrice, MaxCapacity, result);
-        console.log("ผลลัพธ์ที่ค้นพบ:");
-        console.log(filteredResults);
+        
         res.json(filteredResults);
         // res.json({ status: "OK" });
       }

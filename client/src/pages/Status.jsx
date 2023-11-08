@@ -64,9 +64,13 @@ function Status() {
       width: 150,
       renderCell: (params) => (
         params.row.Title === "finished" ? (
-          <Button variant="contained" color="primary" component={Link} to={`/review`}>รีวิว</Button>
-        ) : (
-          <Button variant="contained" color="error" onClick={() => handleCancelButton(params.row.id)}>ยกเลิก</Button>
+          <Button variant="contained" color="primary" component={Link} to={`/roomdetail/${params.row.id}`}>รีวิว</Button>
+        ) 
+        : 
+        (
+          
+          <></>
+          // <Button variant="contained" color="error" onClick={() => handleCancelButton(params.row.id)}>ยกเลิก</Button>
         )
       ),
     },
@@ -76,20 +80,27 @@ function Status() {
 
 
   const [showCancelButton, setShowCancelButton] = useState(true);
-
-  const handleCancelButton = (rowId) => {
+  const CustomerID = localStorage.getItem("CustomerID")
+  
+  const handleCancelButton = (rowId, CustomerID) => {
     const confirmed = window.confirm(
       "แน่ใจนะว่าจะยกเลิก? ทางเราจะไม่คืนเงินทุกกรณี"
     );
 
     if (confirmed) {
-      axios.post("http://localhost:5000/cancelbooking", { bookingId: rowId, Email: Email })
+      axios.post("http://localhost:5000/cancelbooking", { BookingID: rowId, CustomerID })
       .then((response) => {
+        console.log("Cancellation response:", response);
         if (response.status === 200) {
           setRows((prevRows) =>
-            prevRows.map((row) =>
-              row.id === rowId ? { ...row, Status: "ยกเลิกแล้ว" } : row
-            )
+            prevRows.map((row) => {
+              if (row.id === rowId) {
+                console.log("Updating status for row:", row.id);
+                return { ...row, Status: "cancel" };
+              } else {
+                return row;
+              }
+            })
           );
           setShowCancelButton(false);
         } else {
@@ -102,7 +113,6 @@ function Status() {
       });
     }
   };
-
   return (
     <>
       <NavbarUser />

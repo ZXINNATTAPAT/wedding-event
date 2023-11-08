@@ -11,7 +11,7 @@ UserProfile.get("/UserProfile/:Email", (req, res) => {
         if (err) {
             console.log(err);
         } else {
-            console.log(result); // แสดงผลลัพธ์ใน console
+     // แสดงผลลัพธ์ใน console
             res.send(result);
         }
     });
