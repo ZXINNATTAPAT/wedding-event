@@ -103,7 +103,7 @@ const Adminhome = () => {
  
 
   const adminlogout = () => {
-
+    //window.location = "/";
     axios.get("http://localhost:5000/customerlogout", {
       withCredentials: true, 
     })
