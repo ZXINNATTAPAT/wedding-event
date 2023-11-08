@@ -9,7 +9,7 @@ UserProfile.get("/UserProfile/:Email", (req, res) => {
     console.log("ค่าที่ส่งมา:", Email);
     db.query("SELECT Username, PhoneNo, Email FROM `customer` WHERE Email = ?",[Email], (err, result) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
         } else {
      // แสดงผลลัพธ์ใน console
             res.send(result);

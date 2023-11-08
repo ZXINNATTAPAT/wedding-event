@@ -28,9 +28,9 @@ Venue.use(cors());
   Venue.get("/Venue", jsonParser, (req, res) => {
   db.query("SELECT * FROM venue", (err, result) => {
     if (err) {
-      console.log(err);
+      // console.log(err);
   } else {
-      // console.log(result); // แสดงผลลัพธ์ใน console
+      console.log(result); // แสดงผลลัพธ์ใน console
       res.send(result);
   }
 });

@@ -7,7 +7,7 @@ const jsonParser = bodyParser.json();
 ShowReview.get("/ShowReview", (req, res) => {
     db.query("SELECT * FROM review", [req.body.BookingID] ,(err, result) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
         } else {
             // แสดงผลลัพธ์ใน console
             res.send(result);
