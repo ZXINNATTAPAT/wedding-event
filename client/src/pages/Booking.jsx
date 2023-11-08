@@ -27,7 +27,7 @@ function Booking() {
   const [bookingData, setBookingData] = useState({
     BrideName: '',
     GroomName: '',
-    
+
     EventDate: dayjs().toDate(),
     EventStartTime: null,
     EventEndTime: null,
@@ -40,9 +40,15 @@ function Booking() {
     Email: localEmail,
     VenueID: localVenueID,
   });
+
+  const [bookingData2, setshowBookingData2] = useState({
+
+    showMusicID: "",
+    showPhotographerID: "",
+
+  });
   const [getMusic, setMusic] = useState([]);
   const [getPhotographer, setPhotographer] = useState([]);
-  const [getbookingID, setBookingID] = useState('');
 
   useEffect(() => {
     axios.get("http://localhost:5000/Musicdata")
@@ -56,14 +62,16 @@ function Booking() {
         setPhotographer(response.data);
       })
 
-      axios.post("http://localhost:5000/getCustomerID", {
-        Email: localEmail,
-    }).then((response) => {
-  
-        setCustomerID(response.data)
-        
-    })
-    .catch((error) => console.log(error));
+    // axios.post("http://localhost:5000/getCustomerID", {
+    //   Email: localEmail,
+    // }).then((response) => {
+
+    //   const CustomerID = response.data.CustomerID;
+    //   localStorage.setItem("CustomerID", CustomerID);
+    //   console.log(CustomerID);
+
+    // })
+    //   .catch((error) => console.log(error));
   }, [])
 
   // localStorage.setItem("CustomerID", CustomerID)
@@ -78,6 +86,7 @@ function Booking() {
       ...bookingData,
       [name]: value,
     });
+
   }
   const handleMusic = (e) => {
     const { target } = e;
@@ -90,6 +99,10 @@ function Booking() {
       ...bookingData,
       [name]: musicID,
     });
+    setshowBookingData2({
+      ...bookingData2,
+      [name]: value,
+    })
     // console.log("name "+ name) //test log
     // console.log("value "+ value)
     // }
@@ -118,36 +131,41 @@ function Booking() {
 
     const selectedPhotographer = getPhotographer.find((PhotographerOption) => PhotographerOption.NumberofPH === value);
     const photographerID = selectedPhotographer ? selectedPhotographer.PhotographerID : '';
-
+    setshowBookingData2({
+      ...bookingData2,
+      [name]: value,
+    });
     setBookingData((prevBookingData) => ({
       ...prevBookingData,
-      [name]: photographerID, // Add the selected ID to the array
+      [name]: photographerID,
     }));
+
 
   };
 
 
   const book = () => {
     axios.post("http://localhost:5000/createbooking", bookingData)
-    .then((response) => {
-      setBookingID(response.data)
-      console.log("Booking data sent successfully:", response.data);
+      .then((response) => {
+        console.log("Booking data sent successfully:", response.data);
+        
+        const BookingID = response.data.BookingID;
+        localStorage.setItem("BookingID", BookingID);
+        console.log(BookingID);
 
-    })
-    .catch((error) => {
-      console.error("Error sending booking data:", error);
-      console.log(error.response); 
-    });
-  
+      })
+      .catch((error) => {
+        console.error("Error sending booking data:", error);
+        console.log(error.response);
+      });   
+
   }
+ 
 
-  const BookingID = JSON.stringify(getbookingID);
-  console.log(BookingID)
-  localStorage.setItem("BookingID", BookingID)
 
   // console.log("booking data", bookingData);
   // console.log("getmusic", getMusic)
- //console.log(CustomerID)
+  //console.log(CustomerID)
 
   return (
     <>
@@ -298,14 +316,14 @@ function Booking() {
                           name="MusicID"
                           value={bookingData.MusicID}
                           onChange={handleMusic}
-                          // onClick={musicGenreChange}
+                        // onClick={musicGenreChange}
                         >
                           {getMusic.map((musicOption) => (
                             <MenuItem key={musicOption.MusicID} value={musicOption.Genre} >
                               {musicOption.Genre}
                             </MenuItem>
                           ))}
-                        
+
                         </Select>
                       </FormControl>
                     </div>
@@ -351,18 +369,18 @@ function Booking() {
                     ? `จำนวนคน: ${bookingData.NumofGuest}`
                     : null}
                   <br />
-                  {bookingData.PhotographerID !== ""
-                    ? `จำนวนช่างถ่ายรูป: ${bookingData.PhotographerID}`
+                  {bookingData2.photographerID !== ""
+                    ? `จำนวนช่างถ่ายรูป: ${bookingData2.PhotographerID}`
                     : null}
                   <br />
-                  {bookingData.MusicID !== ""
-                    ? `ประเภทดนตรี: ${bookingData.MusicID}`
+                  {bookingData2.MusicID !== ""
+                    ? `ประเภทดนตรี: ${bookingData2.MusicID}`
                     : null}
                 </Card.Text>
 
                 {/* <Link to="/paymentMethod" > */}
-                  <Button variant="primary" onClick={book}>ยืนยันการจอง</Button>
-                  {/* </Link> */}
+                <Button variant="primary" onClick={book}>ยืนยันการจอง</Button>
+                {/* </Link> */}
               </Card.Body>
             </Card>
           </div>
