@@ -34,10 +34,11 @@ function Status() {
   const [selectedRowIds, setSelectedRowIds] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredRows, setFilteredRows] = useState([]); // เพิ่ม filteredRows
-
+  const Email = localStorage.getItem("Email")
   useEffect(() => {
-    axios.get("http://localhost:5000/getbookingList")
-      .then((response) => {
+    axios.post("http://localhost:5000/getbookingList", {
+      Email: Email,  
+  }).then((response) => {
         const rowsWithId = response.data.map((row, index) => ({
           ...row,
           id: index + 1, // สามารถใช้ id จากข้อมูลจริงได้ หรือใช้ index + 1 สำหรับตัวอย่าง
@@ -82,15 +83,23 @@ function Status() {
     );
 
     if (confirmed) {
-      // Update the Status field for the row with the given ID to "ยกเลิกแล้ว"
-      setRows((prevRows) =>
-        prevRows.map((row) =>
-          row.id === rowId ? { ...row, Status: "ยกเลิกแล้ว" } : row
-        )
-      );
-      axios.post("http://localhost:5000/cancelbooking", {
-      }).then(response => response.json())
-      setShowCancelButton(false);
+      axios.post("http://localhost:5000/cancelbooking", { bookingId: rowId, Email: Email })
+      .then((response) => {
+        if (response.status === 200) {
+          setRows((prevRows) =>
+            prevRows.map((row) =>
+              row.id === rowId ? { ...row, Status: "ยกเลิกแล้ว" } : row
+            )
+          );
+          setShowCancelButton(false);
+        } else {
+          alert("Failed to cancel the booking. Please try again later.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error canceling the booking:", error);
+        alert("Failed to cancel the booking. Please try again later.");
+      });
     }
   };
 

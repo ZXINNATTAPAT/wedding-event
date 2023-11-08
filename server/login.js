@@ -71,10 +71,11 @@ login.post("/customerlogin", jsonParser, function (req, res, next) {
             }
             bcrypt.compare(password, customer[0].Password, function (err, isLogin) {
                 if (isLogin) {
-                    req.session.userID = customer;
-                    console.log(req.session.userID);
+                    const customerID = customer[0].CustomerID
+                    req.session.userID = customerID;
+                    // console.log(req.session.userID);
                     req.session.isAuth = true;
-                    res.json({ status: "ok" });
+                    res.json({ status: "ok", customerID});
                 } else {
                     res.json({ status: "error", message: "login failed" });
                 }

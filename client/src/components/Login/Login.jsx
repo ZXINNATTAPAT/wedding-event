@@ -11,7 +11,7 @@ const Login = () => {
     const [username, setUsername] = useState("");
     const [phoneno, setPhoneNo] = useState("");
     const [password, setPassword] = useState("");
-    const [loginStatus, setLoginStatus] = useState("");
+    const [getCustomerID, setCustomerID] = useState("");
     const [action, setAction] = useState("Login");
 
     axios.defaults.withCredentials = true;
@@ -39,8 +39,10 @@ const Login = () => {
             if (response.data.status == 'ok') {
                 window.location = '/Home';
                 alert('Login successful');
-                //const CustomerID = response.data.CustomerID;
-                // localStorage.setItem('CustomerID', CustomerID);
+
+                const CustomerID = response.data.customerID;
+                localStorage.setItem("CustomerID", CustomerID);
+                console.log(CustomerID);
                 localStorage.setItem('Email', email);
                 // setLoginStatus(response.data.message);
             } else {
@@ -88,7 +90,6 @@ const Login = () => {
             ) : (
                 <button className="BottomButton" onClick={customerRegister}>Sign up</button>
             )}
-            <h1>{loginStatus}</h1>
         </div>
     );
 }
