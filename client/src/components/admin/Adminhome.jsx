@@ -21,6 +21,7 @@ import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 import { Link } from "react-router-dom";
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -100,6 +101,22 @@ const Adminhome = () => {
     setOpen(false);
   };
  
+
+  const adminlogout = () => {
+
+    axios.get("http://localhost:5000/customerlogout", {
+      withCredentials: true, 
+    })
+    .then((response) => {
+      if (response.data.status == 'ok') {
+        alert('Logout successful');
+        window.location = "/";
+      } else {
+        alert('Logout failed')
+      }
+    })
+  }
+  
    
   return (
     <>
@@ -120,9 +137,11 @@ const Adminhome = () => {
             >
               <MenuIcon />
             </IconButton>
-           
+           <button onClick={adminlogout}>log out</button>
           </Toolbar>
+          
         </AppBar>
+        
         
         <Drawer variant="permanent" open={open}>
           <DrawerHeader>

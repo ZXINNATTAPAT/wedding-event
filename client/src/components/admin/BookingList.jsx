@@ -14,6 +14,8 @@ function BookingList() {
   const [selectedRowIds, setSelectedRowIds] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredRows, setFilteredRows] = useState([]); // เพิ่ม filteredRows
+  const [getstatus, setStatus] = useState([]);
+
 
   useEffect(() => {
     filterData();
@@ -42,6 +44,14 @@ function BookingList() {
       .catch((error) => {
         console.error("Error fetching data: ", error);
       });
+
+    axios.get("http://localhost:5000/getstatus")
+      .then((response) => {
+        setStatus(response.data)
+      })
+      .catch((error) => {
+        console.error("Error fetching data: ", error);
+      });
   }, []);
 
   // const [selectedRowIds, setSelectedRowIds] = useState([]);
@@ -59,17 +69,19 @@ function BookingList() {
     { field: "NumberofPH", headerName: "No of Photographer", width: 180 },
     { field: "Genre", headerName: "Genre", width: 150 },
     {
-      field: "status",
+      field: "Title",
       headerName: "Status",
       width: 150,
       renderCell: (params) => (
         <Select
-          value={params.row.status}
+          value={params.row.Title}
           onChange={(e) => handleStatusChange(e, params.row.BookingID)}
         >
-          <MenuItem value="Completed">Completed</MenuItem>
-          <MenuItem value="Pending">Pending</MenuItem>
-          <MenuItem value="Canceled">Canceled</MenuItem>
+          {getstatus.map((statusOption) => (
+            <MenuItem key={statusOption.StatusID} value={statusOption.Title}>
+              {statusOption.Title}
+            </MenuItem>
+          ))}
         </Select>
       ),
     },

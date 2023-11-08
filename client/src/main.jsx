@@ -25,6 +25,7 @@ import AdminUser from "./components/admin/AdminUser.jsx";
 import StarRating from "./components/StarRating/StarRating.jsx";
 import Review from "./components/StarRating/Review.jsx";
 import AdminReview from "./components/admin/AdminReview.jsx"
+import Protected from './components/protected.jsx'
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/home",
-    element: <Home />,
+    element: <Protected element = {<Home/>}/>,
   },
   {
     path: "/login",

@@ -17,6 +17,7 @@ const UserProfile = require('./UserProfile');
 const Booking = require("./Booking.js");
 const bookingList = require("./BookingList.js")
 const EditBooking = require("./EditBooking");
+const adminlogin = require("./adminlogin.js")
 
 // const { default: EditProflie } = require('../client/src/components/EditProflie/EditProflie');
 
@@ -63,6 +64,7 @@ app.use("/", bookingList)
 app.use("/", Filter);
 app.use("/", UserProfile);
 app.use("/", EditBooking)
+app.use("/", adminlogin)
 
 app.get("/customer/:id", (req, res) => {
     const { id } = req.params;

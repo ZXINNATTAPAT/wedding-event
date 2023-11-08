@@ -7,7 +7,7 @@ const cors = require("cors");
 
 
 AdminHome.get("/Bookingdata", (req, res) => {
-    db.query("SELECT booking.BookingID, booking.BrideName, booking.GroomName,venue.VenueName ,booking.BookingDateandTime, booking.EventDate, booking.EventStartTime, booking.EventEndTime, booking.NumofGuest, photographer.NumberofPH, music.Genre, status.Title FROM booking INNER JOIN venue ON booking.VenueID= venue.VenueID INNER JOIN photographer ON booking.PhotographerID = photographer.PhotographerID INNER JOIN music ON booking.MusicID = music.MusicID INNER JOIN status ON booking.StatusID = status.StatusID", (err, result) => {
+    db.query("SELECT booking.BookingID, booking.BrideName, booking.GroomName,venue.VenueName ,booking.BookingDateandTime, booking.EventDate, booking.EventStartTime, booking.EventEndTime, booking.NumofGuest, photographer.NumberofPH, music.Genre, status.Title FROM booking INNER JOIN venue ON booking.VenueID= venue.VenueID INNER JOIN photographer ON booking.PhotographerID = photographer.PhotographerID INNER JOIN music ON booking.MusicID = music.MusicID INNER JOIN status ON booking.StatusID = status.StatusID  ORDER BY booking.BookingID ASC", (err, result) => {
         if (err) {
             console.log(err);
         } else {
@@ -16,6 +16,32 @@ AdminHome.get("/Bookingdata", (req, res) => {
         }
     });
 });
+
+
+AdminHome.get("/getstatus", (req, res) => {
+    db.query("SELECT * FROM status", (err, result) => {
+
+        if (err) {
+            console.log(err);
+        } else {
+            //console.log(result); // แสดงผลลัพธ์ใน console
+            res.send(result);
+        }
+    });
+})
+
+AdminHome.post("/updatestatus", (req, res) => {
+    db.query("SELECT * FROM status", (err, result) => {
+
+        if (err) {
+            console.log(err);
+        } else {
+            //console.log(result); // แสดงผลลัพธ์ใน console
+            res.send(result);
+        }
+    });
+})
+
 
 // AdminHome.post("/Bookingdata/:BookingID", (req, res) => {
 //     const BookingID = req.params.BookingID;
@@ -85,7 +111,7 @@ AdminHome.get("/Review", (req, res) => {
 });
 
 AdminHome.delete("/DeleteReview/:ReviewNo", (req, res) => {
-    db.query("DELETE FROM review WHERE ReviewNo = ?;",[req.params.ReviewNo], (err, result) => {
+    db.query("DELETE FROM review WHERE ReviewNo = ?;", [req.params.ReviewNo], (err, result) => {
         if (err) {
             console.log(err);
         } else {

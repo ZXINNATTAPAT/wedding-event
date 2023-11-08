@@ -28,8 +28,8 @@ const jsonParser = bodyParser.json();
 // });
 
 Review.post("/Review", (req, res) => {
-    const Email = req.params.Email;
-    console.log("ค่าที่ส่งมา:", Email);
+    const BookingID = req.body.BookingID;
+        console.log("ค่าที่ส่งมา:", BookingID);
     db.query("INSERT INTO review (Score, Description,BookingID) VALUES (?, ?, ?);",[req.body.Score, req.body.Description,req.body.BookingID], (err, result) => {
         if (err) {
             console.log(err);

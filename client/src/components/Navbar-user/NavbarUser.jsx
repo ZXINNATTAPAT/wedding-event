@@ -20,8 +20,10 @@ const NavbarUser = () => {
 
   const customerLogout = () => {
 
-    axios.get("http://localhost:5000/customerlogout", {withCredentials: true}, {
-    }).then((response) => {
+    axios.get("http://localhost:5000/customerlogout", {
+      withCredentials: true, 
+    })
+    .then((response) => {
       if (response.data.status == 'ok') {
         alert('Logout successful');
         window.location = "/";
@@ -29,8 +31,6 @@ const NavbarUser = () => {
         alert('Logout failed')
       }
     })
-
-
   }
 
 

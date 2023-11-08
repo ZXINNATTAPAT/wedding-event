@@ -110,9 +110,16 @@ const Roomdetail = () => {
   // const status = query.get('status');
   // const isReviewEnabled = status === 'เสร็จสิ้น';
 
-  if (!roomData) {
-    return <div>Room not found</div>;
-  }
+    if (!roomData) {
+        return <div>Room not found</div>;
+    }
+
+    const selectedID = () => {
+        localStorage.setItem('VenueID', roomId);
+        // const venue = localStorage.getItem('VenueID')
+        // console.log(venue)
+    }
+    selectedID();
 
   // const getEmail = localStorage.getItem("Email");
   // const [Username, setUsername] = useState('');

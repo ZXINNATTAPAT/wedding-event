@@ -19,20 +19,30 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import NavbarUser from "../components/Navbar-user/NavbarUser";
 import axios from "axios";
-import Photographer from "../components/admin/Photographer";
 
 function Booking() {
+  const localEmail = localStorage.getItem("Email")
+  const localVenueID = localStorage.getItem("VenueID")
+  const [CustomerID, setCustomerID] = useState('')
   const [bookingData, setBookingData] = useState({
-    roomName: "ชื่อห้อง",
-    date: dayjs().toDate(),
-    timeStart: null,
-    timeEnd: null,
-    numberOfPeople: "",
+    BrideName: '',
+    GroomName: '',
+    
+    EventDate: dayjs().toDate(),
+    EventStartTime: null,
+    EventEndTime: null,
+    NumofGuest: "",
     numOfPhotos: "",
-    Genre: "",
+    roomName: "ชื่อห้อง",
+    // Genre: "",
+    MusicID: "",
+    PhotographerID: "",
+    Email: localEmail,
+    VenueID: localVenueID,
   });
   const [getMusic, setMusic] = useState([]);
   const [getPhotographer, setPhotographer] = useState([]);
+  const [getbookingID, setBookingID] = useState('');
 
   useEffect(() => {
     axios.get("http://localhost:5000/Musicdata")
@@ -45,16 +55,43 @@ function Booking() {
       .then((response) => {
         setPhotographer(response.data);
       })
+
+      axios.post("http://localhost:5000/getCustomerID", {
+        Email: localEmail,
+    }).then((response) => {
+  
+        setCustomerID(response.data)
+        
+    })
+    .catch((error) => console.log(error));
   }, [])
 
+  // localStorage.setItem("CustomerID", CustomerID)
+  // console.log(CustomerID); 
+  // const test = CustomerID.CustomerID
+  //   localStorage.setItem("CustomerID", test)
+  // console.log(test)
   const handleChange = (e) => {
     const { target } = e;
     const { name, value } = target;
-
     setBookingData({
       ...bookingData,
       [name]: value,
     });
+  }
+  const handleMusic = (e) => {
+    const { target } = e;
+    const { name, value } = target;
+
+    const selectedMusic = getMusic.find((musicOption) => musicOption.Genre === value);
+    const musicID = selectedMusic ? selectedMusic.MusicID : '';
+
+    setBookingData({
+      ...bookingData,
+      [name]: musicID,
+    });
+    // console.log("name "+ name) //test log
+    // console.log("value "+ value)
     // }
   };
   const dateChange = (newValue) => {
@@ -67,19 +104,53 @@ function Booking() {
   const timeStartChange = (newValue) => {
     setBookingData({
       ...bookingData,
-      timeStart: newValue,
+      EventStartTime: newValue,
     });
   };
   const timeEndChange = (newValue) => {
     setBookingData({
       ...bookingData,
-      timeEnd: newValue,
+      EventEndTime: newValue,
     });
   };
+  const photographerChange = (event) => {
+    const { name, value } = event.target;
+
+    const selectedPhotographer = getPhotographer.find((PhotographerOption) => PhotographerOption.NumberofPH === value);
+    const photographerID = selectedPhotographer ? selectedPhotographer.PhotographerID : '';
+
+    setBookingData((prevBookingData) => ({
+      ...prevBookingData,
+      [name]: photographerID, // Add the selected ID to the array
+    }));
+
+  };
+
+
+  const book = () => {
+    axios.post("http://localhost:5000/createbooking", bookingData)
+    .then((response) => {
+      console.log("Booking data sent successfully:", response.data);
+
+        const BookingID = response.data.BookingID;
+        localStorage.setItem("BookingID", BookingID);
+        console.log(BookingID);
+
+    })
+    .catch((error) => {
+      console.error("Error sending booking data:", error);
+      console.log(error.response); 
+    });
+  
+  }
+
+  const BookingID = JSON.stringify(getbookingID);
+  console.log(BookingID)
+  localStorage.setItem("BookingID", BookingID)
 
   // console.log("booking data", bookingData);
   // console.log("getmusic", getMusic)
-
+ //console.log(CustomerID)
 
   return (
     <>
@@ -105,11 +176,12 @@ function Booking() {
                         <TextField
                           required
                           id=""
-                          name=""
-                          label="ชื่อ-นามสกุลเจ้าบ่าว"
+                          name="BrideName"
+                          label="ชื่อ-นามสกุลเจ้าสาว"
                           fullWidth
                           autoComplete=""
                           variant="outlined"
+                          onChange={handleChange}
                         />
                       </Col>
                     </Form.Group>
@@ -118,11 +190,12 @@ function Booking() {
                         <TextField
                           required
                           id=""
-                          name=""
-                          label="ชื่อ-นามสกุลเจ้าสาว"
+                          name="GroomName"
+                          label="ชื่อ-นามสกุลเจ้าบ่าว"
                           fullWidth
                           autoComplete=""
                           variant="outlined"
+                          onChange={handleChange}
                         />
                       </Col>
                     </Form.Group>
@@ -189,7 +262,7 @@ function Booking() {
                             label="จำนวนคน"
                             fullWidth
                             variant="outlined"
-                            name="numberOfPeople"
+                            name="NumofGuest"
                             onChange={handleChange}
                           />
                         </Col>
@@ -203,20 +276,16 @@ function Booking() {
                         <Select
                           required
                           id="demo-simple-select-helper"
-                          value={bookingData.numOfPhotos}
-                          name="numOfPhotos"
-                          onChange={handleChange}
+                          value={bookingData.PhotographerID}
+                          // multiple 
+                          name="PhotographerID"
+                          onChange={photographerChange}
                         >
                           {getPhotographer.map((photographerOption) => (
                             <MenuItem key={photographerOption.PhotographerID} value={photographerOption.NumberofPH}>
                               {photographerOption.NumberofPH}
                             </MenuItem>
                           ))}
-                          {/* <MenuItem value={"ไม่มี"}>ไม่มี</MenuItem>
-                          <MenuItem value={1}>1</MenuItem>
-                          <MenuItem value={2}>2</MenuItem>
-                          <MenuItem value={3}>3</MenuItem>
-                          <MenuItem value={4}>4</MenuItem> */}
                         </Select>
                       </FormControl>
                       <FormControl
@@ -229,22 +298,17 @@ function Booking() {
                           required
                           id="demo-simple-select-helper"
                           defaultValue="undefined"
-                          name="Genre"
-                          // options={getMusic}
-                          // getOptionLabel={(option) => option.music}
-                          value={bookingData.Genre}
-                          onChange={handleChange}
+                          name="MusicID"
+                          value={bookingData.MusicID}
+                          onChange={handleMusic}
+                          // onClick={musicGenreChange}
                         >
                           {getMusic.map((musicOption) => (
-                            <MenuItem key={musicOption.MusicID} value={musicOption.Genre}>
+                            <MenuItem key={musicOption.MusicID} value={musicOption.Genre} >
                               {musicOption.Genre}
                             </MenuItem>
                           ))}
-                          {/* <MenuItem value={"Jazz"}>Jazz</MenuItem>
-                        <MenuItem value={"R&B"}>R&B</MenuItem>
-                        <MenuItem value={"Blues"}>Blues</MenuItem>
-                        <MenuItem value={"Soul"}>Soul</MenuItem>
-                        <MenuItem value={"Pop music"}>Pop music</MenuItem> */}
+                        
                         </Select>
                       </FormControl>
                     </div>
@@ -259,16 +323,16 @@ function Booking() {
                 <Card.Title>ชื่อห้อง</Card.Title>
                 <Card.Text>
                   <label>รายละเอียดงาน</label> <br />
-                  {bookingData.date
-                    ? ` วัน ${bookingData.date.toLocaleDateString("th-TH", {
+                  {bookingData.EventDate
+                    ? ` วัน ${bookingData.EventDate.toLocaleDateString("th-TH", {
                       year: "numeric",
                       month: "2-digit",
                       day: "2-digit",
                     })}`
                     : null}
                   <br />
-                  {bookingData.timeStart
-                    ? ` เวลา ${new Date(bookingData.timeStart).toLocaleTimeString(
+                  {bookingData.EventStartTime
+                    ? ` เวลา ${new Date(bookingData.EventStartTime).toLocaleTimeString(
                       "th-TH",
                       {
                         hour: "2-digit",
@@ -276,8 +340,8 @@ function Booking() {
                       }
                     )}`
                     : null}
-                  {bookingData.timeEnd
-                    ? ` -  ${new Date(bookingData.timeEnd).toLocaleTimeString(
+                  {bookingData.EventEndTime
+                    ? ` -  ${new Date(bookingData.EventEndTime).toLocaleTimeString(
                       "th-TH",
                       {
                         hour: "2-digit",
@@ -286,20 +350,22 @@ function Booking() {
                     )}`
                     : null}
                   <br />
-                  {bookingData.numberOfPeople
-                    ? `จำนวนคน: ${bookingData.numberOfPeople}`
+                  {bookingData.NumofGuest
+                    ? `จำนวนคน: ${bookingData.NumofGuest}`
                     : null}
                   <br />
-                  {bookingData.numOfPhotos !== ""
-                    ? `จำนวนช่างถ่ายรูป: ${bookingData.numOfPhotos}`
+                  {bookingData.PhotographerID !== ""
+                    ? `จำนวนช่างถ่ายรูป: ${bookingData.PhotographerID}`
                     : null}
                   <br />
-                  {bookingData.Genre !== ""
-                    ? `ประเภทดนตรี: ${bookingData.Genre}`
+                  {bookingData.MusicID !== ""
+                    ? `ประเภทดนตรี: ${bookingData.MusicID}`
                     : null}
                 </Card.Text>
 
-                <Link to="/paymentMethod" ><Button variant="primary">ยืนยันการจอง</Button></Link>
+                <Link to="/paymentMethod" >
+                  <Button variant="primary" onClick={book}>ยืนยันการจอง</Button>
+                  </Link>
               </Card.Body>
             </Card>
           </div>

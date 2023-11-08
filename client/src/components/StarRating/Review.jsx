@@ -18,11 +18,14 @@ const stars = [1, 2, 3, 4, 5];
 const Review = () => {
   const [selectedStar, setSelectedStar] = useState(null);
   const [reviewText, setReviewText] = useState('');
+  const getBookingID = localStorage.getItem("BookingID");
+  // const [Email, setEmail] = useState(getEmail);
 
   const postReview = () => {
     const data = {
-      starRating: selectedStar,
-      reviewText: reviewText
+      Score: selectedStar,
+      Description: reviewText,
+      BookingID: getBookingID
     };
 
     axios.post('http://localhost:5000/Review', data)

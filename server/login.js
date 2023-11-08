@@ -26,7 +26,7 @@ login.use(session(
         resave: false,
         saveUninitialized: false,
         cookie: {
-            expires: 3600 * 24,
+            expires: 3600 * 1000 * 24,
         }
     }
 ))
@@ -53,14 +53,6 @@ login.post("/customerregister", jsonParser, (req, res, next) => {
     });
 });
 
-// login.get("/customerlogin", (req, res) => {
-//     if (req.session.userID) {
-//         res.send({ loggedIn: true, customer: req.session.userID });
-//     } else {
-//         res.send({ loggedIn: false });
-//     }
-// });
-
 login.post("/customerlogin", jsonParser, function (req, res, next) {
     const email = req.body.Email;
     const password = req.body.Password;
@@ -81,9 +73,8 @@ login.post("/customerlogin", jsonParser, function (req, res, next) {
                 if (isLogin) {
                     req.session.userID = customer;
                     console.log(req.session.userID);
-                    // res.redirect("/Home")
-                    // res.send(customer);
-                    res.json({ status: "ok"});
+                    req.session.isAuth = true;
+                    res.json({ status: "ok" });
                 } else {
                     res.json({ status: "error", message: "login failed" });
                 }
@@ -94,64 +85,42 @@ login.post("/customerlogin", jsonParser, function (req, res, next) {
 
 login.get("/customerlogout", (req, res) => {
     if (req.session.userID) {
-        req.session.destroy((err) => {
-            if (err) {
-                console.error("Error destroying session:", err);
-                res.json({ status: "error", message: "Logout failed" });
-            } else {
-                res.json({ status: "ok", message: "Logout success" });
-            }
-        });
+        req.session.destroy
+            ((err) => {
+                if (err) {
+                    console.error("Error destroying session:", err);
+                    res.json({ status: "error", message: "Logout failed" });
+                } else {
+                    res.clearCookie("userID");
+                    res.json({ status: "ok", message: "Logout success" });
+                }
+            });
+
     } else {
         res.json({ status: "error", message: "User is not logged in" });
     }
 });
 
 
-
 //middleware
-// const isAuth = (req, res, next) => {
-//     if(req.session.isAuth) {
-//         next();
-//     }else{
-//         req.session.error = "You have to Login first";
-//         res.render('/Login')
-//     }
-    
-// }
-// login.get("/Home", isAuth ,(req, res) => {
-//     res.render("Home")
-// })
+const isAuth = (req, res, next) => {
+    if (req.session.isAuth) {
+        next();
+    } else {
+        res.status(401).json({ status: 'error' })
+    }
 
-
-// login.get("/", NotLoggedIn, (req,res, next) => {
-//     db.execute("SELECT Username FROM customer WHERE CustomerID = ?", [req.session.userID])
-//     .then(([rows]) => {
-//         res.render(" ", {
-//             Username: rows[0].Username
-//         })
-//     })
-// })
-
+}
+login.get("/authen", isAuth, (req, res) => {
+    res.json({ status: "ok" })
+})
 
 //Admin
-// login.get("/adminlogin", (req, res) => {
-//     if (req.session.userID) {
-//         res.send({ loggedIn: true, customer: req.session.userID });
-//     } else {
-//         res.send({ loggedIn: false });
-//     }
-// });
-
 // login.post("/adminregister", jsonParser, (req, res, next) => {
 //     const username = req.body.username;
 //     const email = req.body.email;
 //     const password = req.body.password;
 //     const phoneNo = req.body.phoneno;
-//     console.log(username)
-//     console.log(email)
-//     console.log(password)
-//     console.log(phoneNo)
 
 //     bcrypt.hash(password, saltRounds, function (err, hash) {
 //         db.execute(
@@ -188,47 +157,36 @@ login.get("/customerlogout", (req, res) => {
 //                 if (isLogin) {
 //                     req.session.userID = admin;
 //                     console.log(req.session.userID);
-//                     // res.send(admin);
-//                     res.json({ status: "ok", message: "login success" });
+//                     req.session.isAuth = true;
+//                     res.json({ status: "ok" });
 //                 } else {
 //                     res.json({ status: "error", message: "login failed" });
+//                     console.log('Stored Hashed Password:', admin[0].AdminPassword);
+//                     console.log('bcrypt.compare Result:', isLogin);
+
 //                 }
 //             });
 //         }
 //     );
 // });
 
-login.post("/test", jsonParser, function (req, res, next) {
-    const email = req.body.email;
-    const password = req.body.password;
+// login.get("/adminlogout", (req, res) => {
+//     if (req.session.userID) {
+//         req.session.destroy
+//             ((err) => {
+//                 if (err) {
+//                     console.error("Error destroying session:", err);
+//                     res.json({ status: "error", message: "Logout failed" });
+//                 } else {
+//                     res.clearCookie("userID");
+//                     res.json({ status: "ok", message: "Logout success" });
+//                 }
+//             });
 
-    req.session.userID = email;
-    console.log(req.session.userID);
-    // db.execute(
-    //     "SELECT * FROM customer WHERE Email = ?",
-    //     [email],
-    //     function (err, customer, fields) {
-    //         if (err) {
-    //             res.json({ status: "error", message: "failed" });
-    //             return;
-    //         }
-    //         if (customer.length == 0) {
-    //             res.json({ status: "error", message: "no user found" });
-    //             return;
-    //         }
-    //         bcrypt.compare(password, customer[0].Password, function (err, isLogin) {
-    //             if (isLogin) {
-    //                 req.session.userID = customer;
-    //                 console.log(req.session.userID);
-    //                 // res.redirect("/Home")
-    //                 // res.send(customer);
-    //                 res.json({ status: "ok", message: "login success" });
-    //             } else {
-    //                 res.json({ status: "error", message: "login failed" });
-    //             }
-    //         });
-    //     }
-    // );
-});
+//     } else {
+//         res.json({ status: "error", message: "User is not logged in" });
+//     }
+// });
+
 
 module.exports = login;
