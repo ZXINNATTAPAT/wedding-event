@@ -152,11 +152,6 @@ function Booking() {
         const BookingID = response.data.BookingID;
         localStorage.setItem("BookingID", BookingID);
         console.log(BookingID);
-
-        const BookingID = response.data.BookingID;
-        localStorage.setItem("BookingID", BookingID);
-        console.log(BookingID);
-
     })
     .catch((error) => {
       console.error("Error sending booking data:", error);

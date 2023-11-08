@@ -1,26 +1,23 @@
-import NavbarUser from "../components/Navbar-user/NavbarUser";
-import { Link } from "react-router-dom";
+// import * as React from 'react';
+import Navbar from "../components/Navbar/Navbar";
+import { Link } from 'react-router-dom'
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
-import Button from "react-bootstrap/Button";
+import Button from "@mui/material/Button";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Select from "@mui/material/Select";
-import InputLabel from '@mui/material/InputLabel';
 // import Select from "@mui/material/Select";
 // import InputLabel from "@mui/material/InputLabel";
 // import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { useState, useEffect } from "react";
-import { MenuItem } from "@mui/material";
-import axios from "axios";
+import { useState } from "react";
 
 const Img = styled("img")({
   margin: "auto",
@@ -49,216 +46,156 @@ function subtotal(items) {
 
 const rows = [
   createRow("ห้อง", 1, 29000),
-  createRow("ประเภทดนตรี", "Blue", 2000),
+  createRow("จำนวนคน", 100, 200),
   createRow("จำนวนช่างถ่ายรูป", 4, 3000),
 ];
 
 const invoiceSubtotal = subtotal(rows);
 const invoiceTaxes = TAX_RATE * invoiceSubtotal;
 const invoiceTotal = invoiceTaxes + invoiceSubtotal;
-
 function PaymentMethod() {
   const [selectedMethod, setSelectedMethod] = useState("");
-  const [paymentOptions, setPaymentOptions] = useState([]);
-  const [roomdetail, setRoomdetail] = useState([]);
 
-  useEffect(() => {
-    // Fetch payment method options from the backend
-    axios.get('http://localhost:5000/PaymentMethod')
-      .then((response) => {
-        setPaymentOptions(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching payment methods:', error);
-      });
-
-    axios.get("http://localhost:5000/getbookingdetail")
-      .then((response) => {
-        console.log(response.data);
-        setRoomdetail(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching room details:', error);
-      });
-  }, []);
-
-
-
-  const handlePaymentMethod = (e) => {
+  const handlePaymentMethodChange = (e) => {
     setSelectedMethod(e.target.value);
-
   };
-
-  // console.log(selectedMethod);
+  console.log(selectedMethod);
   return (
     <>
-      <NavbarUser />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <Grid container spacing={1}>
-      {roomdetail.map((detail, index) => (
-        <Grid item xs={12} sm={6} key={index}>
-          <Paper
-            sx={{
-              p: 2,
-              margin: "auto",
-              maxWidth: "70%",
-              flexGrow: 1,
-              backgroundColor: (theme) =>
-                theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-            }}
-          >
-            <Grid container spacing={2}>
-              <Grid item>
-                <ButtonBase
-                  sx={{
-                    margin: "auto",
-                    display: "block",
-                    maxWidth: "100%",
-                    maxHeight: "100%",
-                  }}
-                >
-                  <Img
-                    alt="รูปห้อง"
-                    src="https://venuee.s3-ap-southeast-1.amazonaws.com/2019/06/04/l/1559619795-BLISTON-14_07_2016_0518.jpg"
-                  />
-                </ButtonBase>
-              </Grid>
-              <Grid item xs={12} container direction="column" spacing={2}>
-                <Grid item xs>
-                  <Typography gutterBottom variant="subtitle1">
-                    ชื่อห้อง: {detail.VenueName}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    วันที่: {detail.EventDate}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    เวลา: {detail.EventStartTime}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    จำนวนคน: {detail.NumofGuest}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    จำนวนช่างถ่ายรูป: {detail.NumberofPH}
-                  </Typography>
-                  <Typography variant="body2" gutterBottom>
-                    ประเภทดนตรี: {detail.Genre}
-                  </Typography>
-                </Grid>
-                <Grid item sx={{ textAlign: "center" }}>
-                  <Link to="/booking">
-                    <Button variant="primary">แก้ไข</Button>
-                  </Link>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
-      ))}
-        <Grid item xs={12} sm={6}>
-          <TableContainer>
-            <Table
+    <Navbar/>
+<br />
+<br />
+<br />
+<br />
+<br />
+      <Paper
+        sx={{
+          p: 2,
+          margin: "auto",
+          maxWidth: 500,
+          flexGrow: 1,
+          backgroundColor: (theme) =>
+            theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+        }}
+      >
+        <Grid container spacing={2}>
+          <Grid item>
+            <ButtonBase
               sx={{
                 margin: "auto",
-                maxWidth: 400,
+                display: "block",
+                maxWidth: "100%",
+                maxHeight: "100%",
               }}
             >
-              <Paper sx={{ margin: 2 }}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>รายการ</TableCell>
-                    <TableCell align="right">จำนวน</TableCell>
-                    <TableCell align="right">ราคา</TableCell>
-                    {/* <TableCell align="right">รวม</TableCell> */}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {rows.map((row) => (
-                    <TableRow key={row.desc}>
-                      <TableCell>{row.desc}</TableCell>
-                      <TableCell align="right">{row.qty}</TableCell>
-                      <TableCell align="right">{row.unit}</TableCell>
-                      {/* <TableCell align="right">
-                        {ccyFormat(row.price)}
-                      </TableCell> */}
-                    </TableRow>
-                  ))}
-                  <TableRow>
-                    {/* <TableCell rowSpan={3} /> */}
-                    <TableCell colSpan={2}>ยอดรวม</TableCell>
-                    <TableCell align="right">
-                      {ccyFormat(invoiceTotal)}
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-                <FormControl sx={{ textAlign: "center", width: "90%", margin: 2 }}>
-                  <InputLabel id="demo-simple-select-helper-label">เลือกวิธีการชำระเงิน</InputLabel>
-                  <Select
-                    style={{ textAlign: "center" }}
-                    name=""
-                    id="demo-simple-select-helper"
-                    onChange={handlePaymentMethod}
-                  >
-                    <MenuItem value="">
-                      <em>เลือกวิธีการชำระเงิน</em>
-                    </MenuItem>
-                    {paymentOptions.map((option) => (
-                      <MenuItem key={option.MethodNo} value={option.Method}>
-                        {option.Method}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  <Grid sx={{ mt: 2 }}>
-                    <Link to={`/payment/${selectedMethod}`}>
-                      <Button variant="primary">ชำระเงิน</Button>
-                    </Link>
-                  </Grid>
-                </FormControl>
+              <Img
+                alt="รูปห้อง"
+                src="https://venuee.s3-ap-southeast-1.amazonaws.com/2019/06/04/l/1559619795-BLISTON-14_07_2016_0518.jpg"
+              />
+            </ButtonBase>
+          </Grid>
+          <Grid item xs={12} sm container>
+            <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs>
+                <Typography gutterBottom variant="subtitle1" >
+                  ชื่อห้อง
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  วันที่
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  เวลา
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  จำนวนคน
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  จำนวนช่างถ่ายรูป
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  ประเภทดนตรี
+                </Typography>
+              </Grid>
+              <Grid item>
+              <Link to="/booking" ><Button variant="contained">แก้ไข</Button></Link>
 
-                {/* <FormControl
-                  sx={{ textAlign: "center", width: "90%", margin: 2 }}
-                >
-                  <InputLabel id="demo-simple-select-helper-label">เลือกวิธีการชำระเงิน</InputLabel>
-
-                  <Select
-                    style={{ textAlign: "center" }}
-                    name=""
-                    id="demo-simple-select-helper"
-                    onChange={handlePaymentMethod}
-
-                  >
-                    <MenuItem value="">
-                      <em>เลือกวิธีการชำระเงิน</em>
-                      </MenuItem>
-                      </MenuItem>
-                      <MenuItem value="creditCard">บัตรเครดิต</MenuItem>
-                      <MenuItem value="qrCode">สแกนคิวอาร์โค้ด</MenuItem>
-                      <MenuItem value="bankTransfer">
-                        โอนผ่านบัญชีธนาคาร
-                      </MenuItem>
-                          <MenuItem value="">
-                          <em>เลือกวิธีการชำระเงิน</em>
-                        </MenuItem>
-                        {paymentOptions.map((option) => (
-                          <MenuItem key={option.PaymentMethodID} value={option.PaymentMethod}>
-                            {option.PaymentMethod}
-                          </MenuItem>
-                        )}
-                    </Select>
-                  <Grid sx={{ mt: 2 }}>
-                    <Link to={`/payment/${selectedMethod}`}>
-                      <Button variant="primary">ชำระเงิน</Button>
-                    </Link>
-                  </Grid>
-                </FormControl> */}
-              </Paper>
-            </Table>
-          </TableContainer>
+                {/* <Button sx={{ cursor: "pointer" }} variant="contained">
+                  แก้ไข
+                </Button> */}
+              </Grid>
+            </Grid>
+            <Grid item>
+              <Typography variant="subtitle1" >
+                ราคาห้อง
+              </Typography>
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
+      </Paper>
+      <TableContainer>
+        <Table
+          sx={{
+            margin: "auto",
+            maxWidth: 400,
+          }}
+        >
+          <Paper sx={{ margin: 2 }}>
+            <TableHead>
+              {/* <TableRow>
+            <TableCell align="center" colSpan={3}>
+              รายละเอียด
+            </TableCell>
+            <TableCell align="right">Price</TableCell>
+          </TableRow> */}
+              <TableRow>
+                <TableCell>รายการ</TableCell>
+                <TableCell align="right">จำนวน</TableCell>
+                <TableCell align="right">ราคา</TableCell>
+                <TableCell align="right">รวม</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.desc}>
+                  <TableCell>{row.desc}</TableCell>
+                  <TableCell align="right">{row.qty}</TableCell>
+                  <TableCell align="right">{row.unit}</TableCell>
+                  <TableCell align="right">{ccyFormat(row.price)}</TableCell>
+                </TableRow>
+              ))}
+              {/* <TableRow>
+            <TableCell rowSpan={3} />
+            <TableCell colSpan={2}>ราคารวม</TableCell>
+            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>Tax</TableCell>
+            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
+            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
+          </TableRow> */}
+              <TableRow>
+                <TableCell rowSpan={3} />
+                <TableCell colSpan={2}>ยอดรวม</TableCell>
+                <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+              </TableRow>
+            </TableBody>
+            <FormControl sx={{ width: "50%", marginTop: 2 }}>
+              <select name="" id="" onChange={handlePaymentMethodChange}>
+                <option value="">เลือกวิธีชำระเงิน</option>
+                <option value="">บัตรเครดิต</option>
+                <option value="">สแกนคิวอาร์โค้ด</option>
+                <option value="">โอนผ่านบัญชีธนาคาร</option>
+              </select>
+              {/* <Link to={`/payment/${selectedMethod}`}>
+                <button>ชำระเงิน</button>
+              </Link> */}
+            </FormControl>
+            <Button sx={{ margin: 2 }} variant="contained">
+              ชำระเงิน
+            </Button>
+          </Paper>
+        </Table>
+      </TableContainer>
     </>
   );
 }
