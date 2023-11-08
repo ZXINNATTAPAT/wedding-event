@@ -50,21 +50,7 @@ const columns = [
     { field: "Password", headerName: "Password",width: 130 },
     { field: "Email", headerName: "Email", type:"email" ,width: 250 },
     { field: "PhoneNo", headerName: "PhoneNo",width: 130 },
-    {
-      field: "actions",
-      headerName: "Actions",
-      width: 150,
-      renderCell: (params) => (
-        <Button
-          variant="contained"
-          color="error"
-          startIcon={<DeleteIcon />}
-          onClick={() => handleDelete(params.row.CustomerID)}
-        >
-          Delete
-        </Button>
-      ),
-    },
+    
   ];
   
 
