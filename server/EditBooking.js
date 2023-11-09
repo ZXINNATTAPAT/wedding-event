@@ -29,7 +29,7 @@ EditBooking.get('/getbookingSUM', jsonParser , (req, res) => {
     console.log("Request object:", req);
   const getBookingID = req.query.getBookingID;
   console.log("ค่าที่ส่งมา:", getBookingID);
-    db.query("SELECT SUM(venue.VenuePrice) + SUM(photographer.PhotographerPrice) + SUM(music.MusicPrice) AS GrandTotal FROM booking INNER JOIN venue ON booking.VenueID = venue.VenueID INNER JOIN photographer ON photographer.PhotographerID = booking.PhotographerID INNER JOIN music ON music.MusicID = booking.MusicID WHERE BookingID = 1",
+    db.query("SELECT SUM(venue.VenuePrice) + SUM(photographer.PhotographerPrice) + SUM(music.MusicPrice) AS GrandTotal FROM booking INNER JOIN venue ON booking.VenueID = venue.VenueID INNER JOIN photographer ON photographer.PhotographerID = booking.PhotographerID INNER JOIN music ON music.MusicID = booking.MusicID WHERE BookingID = ?",
         [getBookingID],
         function (err, results, fields) {
             if (err) {
