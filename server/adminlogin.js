@@ -10,6 +10,7 @@ const saltRounds = 10;
 
 const adminlogin = express();
 const jsonParser = bodyParser.json();
+
 adminlogin.use(cors({
     origin: ["http://localhost:5173"],
     methods: ["GET", "POST"],
