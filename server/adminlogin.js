@@ -23,6 +23,7 @@ adminlogin.use(bodyParser.urlencoded({ extended: true }));
 
 adminlogin.use(session(
     {
+        
         key: "userID",
         secret: "wedding-event",
         resave: false,
