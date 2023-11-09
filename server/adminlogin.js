@@ -17,6 +17,7 @@ adminlogin.use(cors({
     credentials: true
 }));
 
+
 adminlogin.use(cookieParser());
 adminlogin.use(bodyParser.urlencoded({ extended: true }));
 
